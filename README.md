@@ -1,4 +1,4 @@
-#Common4Android v2.0
+#CommonAndroid v2.0
 
   Common methods for android developer v2.0.
 
