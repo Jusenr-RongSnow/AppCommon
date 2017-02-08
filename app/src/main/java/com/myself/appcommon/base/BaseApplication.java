@@ -110,4 +110,6 @@ public class BaseApplication extends Application {
         ExternalStorageReceiver storageReceiver = new ExternalStorageReceiver();
         mBaseApplication.registerReceiver(storageReceiver, filterStorage);
     }
+
+
 }

@@ -403,7 +403,7 @@ abstract public class BaseActivity extends FragmentActivity {
     /**
      * 设置状态栏透明度
      *
-     * @param res
+     * @param alpha
      */
     public void setStatusBarAlpha(int alpha) {
         if (needTranslucent() && mTintManager != null) {

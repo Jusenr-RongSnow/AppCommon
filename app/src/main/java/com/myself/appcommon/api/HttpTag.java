@@ -9,7 +9,7 @@ import com.myself.appcommon.config.Constants;
  */
 public enum HttpTag {
 
-    TEST(Constants.TAG_TYPE_STRING, 1, "http://www.baidu.com", null);
+    TEST(Constants.TAG_TYPE_STRING, 1, Constants.URL_TEST, null);
 
     /**
      * HttpTag

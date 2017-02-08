@@ -104,4 +104,8 @@ public class Constants {
      */
     public static final String MSG_OK = "ok";
 
+    /**
+     * url
+     */
+    public static final String URL_TEST = "http://blog.csdn.net/github_35033182";
 }

@@ -33,7 +33,7 @@
 
         <activity
             android:name=".activity.NextActivity"
-            android:theme="@style/TranslucentTheme"/>
+            android:theme="@style/AppTheme"/>
 
     </application>
 </manifest>

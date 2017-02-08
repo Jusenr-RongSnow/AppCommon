@@ -221,7 +221,6 @@ public class HttpDataDownloadPool {
                         final Object jsonResult = HttpTagDispatch.dispatch(request, json);
                         if (jsonResult != null) {
                             onRecvOK(request, response, HttpEngine.HttpCode.STATUS_OK, jsonResult);
-
                         } else {
                             onRecvError(request, response, HttpEngine.HttpCode.ERROR_NET_ACCESS, Constants.HTTP_DATA_FAIL);
                         }
