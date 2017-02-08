@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     public static final String TAG = "MainActivity";
 
     // 文章详情页面是否显示评论以及评论和赞数量
-    // putao://pageSetting/{'isComment':'1','commentNumber':'xxx','zanNumber':'xxx'}
+    // baidu://pageSetting/{'isComment':'1','commentNumber':'xxx','zanNumber':'xxx'}
     public static String PAGE_SETTING = "pageSetting";
 
     private Button mBtn;
@@ -194,7 +194,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
                 case ProtocolHeader.PROTOCOL_HEADER_HTTPS:
                     view.loadUrl(url);
                     break;
-                case ProtocolHeader.PROTOCOL_HEADER_PUTAO:
+                case ProtocolHeader.PROTOCOL_HEADER_BAIDU:
                     // 网页加载完js会通过此方法把 article_title, description, share_pic 传过来
                     String scheme = getScheme(url);
                     String content = getContentUrl(url);
@@ -331,7 +331,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     public static final class ProtocolHeader {
         public static final String PROTOCOL_HEADER_HTTP = "http";
         public static final String PROTOCOL_HEADER_HTTPS = "https";
-        public static final String PROTOCOL_HEADER_PUTAO = "putao";
+        public static final String PROTOCOL_HEADER_BAIDU = "baidu";
         public static final String PROTOCOL_HEADER_WEIXIN = "weixin";
     }
 
