@@ -107,5 +107,6 @@ public class Constants {
     /**
      * url
      */
-    public static final String URL_TEST = "http://blog.csdn.net/github_35033182";
+    public static final String URL_TEST = "https://www.baidu.com";
+//    public static final String URL_TEST = "http://blog.csdn.net/github_35033182";
 }
