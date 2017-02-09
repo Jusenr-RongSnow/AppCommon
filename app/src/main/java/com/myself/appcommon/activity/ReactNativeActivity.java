@@ -10,6 +10,7 @@ import com.facebook.react.ReactRootView;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 import com.myself.appcommon.BuildConfig;
+import com.myself.appcommon.R;
 
 public class ReactNativeActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
@@ -20,8 +21,8 @@ public class ReactNativeActivity extends AppCompatActivity implements DefaultHar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_react_native);
-        mReactRootView = new ReactRootView(this);
+        setContentView(R.layout.activity_react_native);
+//        mReactRootView = new ReactRootView(this);
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle")
@@ -30,9 +31,10 @@ public class ReactNativeActivity extends AppCompatActivity implements DefaultHar
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
+        mReactRootView = (ReactRootView) findViewById(R.id.reactRootView);
         mReactRootView.startReactApplication(mReactInstanceManager, "TestHello", null);
 
-        setContentView(mReactRootView);
+//        setContentView(mReactRootView);
     }
 
     @Override

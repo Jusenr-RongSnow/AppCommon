@@ -5,18 +5,37 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/bg_EBEBEB"
     tools:context="com.myself.appcommon.activity.MainActivity">
 
     <Button
         android:id="@+id/test_send_request"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发送请求"/>
 
-    <WebView
-        android:id="@+id/test_wv"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+    <Button
+        android:id="@+id/test_webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/test_send_request"
+        android:text="WebView"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/test_react"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/test_webview"
+        android:text="React Native"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/test_react2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/test_react"
+        android:text="React Native2"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

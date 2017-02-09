@@ -32,8 +32,12 @@
         <activity
             android:name=".activity.NextActivity"
             android:theme="@style/AppTheme"/>
-        <activity android:name=".activity.ReactNativeActivity">
-        </activity>
-    </application>
 
+        <activity android:name=".activity.ReactNativeActivity"/>
+
+        <activity android:name=".activity.WebviewActivity"/>
+
+        <activity android:name=".activity.ReactNative2Activity"/>
+
+    </application>
 </manifest>

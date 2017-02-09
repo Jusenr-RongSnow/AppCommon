@@ -2,15 +2,16 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_react_native"
+    android:id="@+id/activity_react_native2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_EBEBEB"
-    tools:context="com.myself.appcommon.activity.ReactNativeActivity">
+    tools:context="com.myself.appcommon.activity.ReactNative2Activity">
 
     <com.facebook.react.ReactRootView
         android:id="@+id/reactRootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 
 </RelativeLayout>
