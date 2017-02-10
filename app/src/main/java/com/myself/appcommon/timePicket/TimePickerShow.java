@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.myself.appcommon.R;
 import com.myself.appcommon.alertdialog.IOSAlertDialog;
@@ -19,10 +20,31 @@ public class TimePickerShow {
 
     private Context context;
     private WheelMain wheelMain;
+    private WheelheightView mWheelheightView;
 
     public TimePickerShow(Context context) {
         super();
         this.context = context;
+    }
+
+    public String getData() {
+        return mWheelheightView.getData("");
+    }
+
+    public View heightPickerView(String dateStr) {
+        View heightPickerView = View.inflate(context, R.layout.timepicker, null);
+        mWheelheightView = new WheelheightView(heightPickerView);
+
+        mWheelheightView.setEND_INTEGER(300);
+        mWheelheightView.setSTART_INTEGER(50);
+        // 若为空显示当前时间
+        if (dateStr != null && !dateStr.equals("")) {
+            mWheelheightView.initDateTimePicker(120, 5, "cm");
+        } else {
+            mWheelheightView.initDateTimePicker(120, 5, "cm");
+        }
+
+        return heightPickerView;
     }
 
     /**
@@ -115,7 +137,7 @@ public class TimePickerShow {
 //        dialog.setTitle("选择日期");
         dialog.setHeadView(headView());
         dialog.setButtonStyle(0);
-        dialog.setView(timePickerView(textView.getText().toString()));
+        dialog.setView(heightPickerView(textView.getText().toString()));
         dialog.setNegativeButton("", new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +148,8 @@ public class TimePickerShow {
         dialog.setPositiveButton("完成", new OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText(getTxtTime("-", "-", "", "", "", ""));
+                textView.setText(getTxtTime("-", "-", " ", ":", ":", ""));
+                Toast.makeText(context, getData(), Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

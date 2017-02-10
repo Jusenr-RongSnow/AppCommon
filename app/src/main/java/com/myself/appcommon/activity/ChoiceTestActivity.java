@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.myself.appcommon.R;
 import com.myself.appcommon.base.BaseActivity;
 import com.myself.appcommon.timePicket.TimePickerShow;
+import com.myself.appcommon.timePicket.WheelheightView;
 
 public class ChoiceTestActivity extends BaseActivity implements View.OnClickListener {
 
@@ -16,6 +17,7 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
     private TextView dateText2;
     private Button getTime;
     private Button alertDialogBtn;
+    private Button test;
     private TimePickerShow timePickerShow;
 
 
@@ -46,10 +48,12 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
         dateText2 = (TextView) findViewById(R.id.txt_date2);
         getTime = (Button) findViewById(R.id.get_time);
         alertDialogBtn = (Button) findViewById(R.id.alertdialog);
+        test = (Button) findViewById(R.id.test);
     }
 
     @Override
     public void initListener() {
+        final TextView view = new TextView(this);
         getTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +64,12 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 timePickerShow.timePickerAlertDialog(dateText2);
+            }
+        });
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new WheelheightView(view);
             }
         });
     }
