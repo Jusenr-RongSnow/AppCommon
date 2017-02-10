@@ -20,9 +20,10 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
 
     private ThemeSettingsHelper mThemeSettingsHelper;
     private Button mTestSendRequest;
-    private Button mTestWebview;
     private Button mTestReact;
     private Button mTestReact2;
+    private Button mTestWebview;
+    private Button mTestChoice;
 
     @Override
     public boolean needTranslucent() {
@@ -53,6 +54,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mTestReact = (Button) findViewById(R.id.test_react);
         mTestReact2 = (Button) findViewById(R.id.test_react2);
         mTestWebview = (Button) findViewById(R.id.test_webview);
+        mTestChoice = (Button) findViewById(R.id.test_choice);
     }
 
     @Override
@@ -66,6 +68,22 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
                 sendRequest();
             }
         });
+        mTestReact.setVisibility(View.GONE);
+        mTestReact2.setVisibility(View.GONE);
+        mTestReact.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//                goToActivity(ReactNativeActivity.class, false);
+            }
+        });
+        mTestReact2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//                goToActivity(ReactNative2Activity.class, false);
+            }
+        });
         mTestWebview.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -73,18 +91,11 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
                 goToActivity(WebviewActivity.class, false);
             }
         });
-        mTestReact.setOnClickListener(new View.OnClickListener() {
+        mTestChoice.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                goToActivity(ReactNativeActivity.class, false);
-            }
-        });
-        mTestReact2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                goToActivity(ReactNative2Activity.class, false);
+                goToActivity(ChoiceTestActivity.class, false);
             }
         });
     }

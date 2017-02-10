@@ -32,12 +32,16 @@
         <activity
             android:name=".activity.NextActivity"
             android:theme="@style/AppTheme"/>
-
-        <activity android:name=".activity.ReactNativeActivity"/>
-
+        <!--ReactNative 测试-->
+        <!--<activity android:name=".activity.ReactNativeActivity"/>-->
+        <!--ReactNative 测试2-->
+        <!--<activity android:name=".activity.ReactNative2Activity"/>-->
+        <!--webview 测试-->
         <activity android:name=".activity.WebviewActivity"/>
+        <!--选择控件测试-->
+        <activity android:name=".activity.ChoiceTestActivity"/>
 
-        <activity android:name=".activity.ReactNative2Activity"/>
 
     </application>
+
 </manifest>
