@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/lLayout_bg"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/dialog_bg"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="标题"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/txt_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="提示"
+        android:textColor="#000000"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/edittxt_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:hint="请输入信息"
+        android:textColor="#000000"
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:id="@+id/dialog_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/dialog_marBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="#dddddd"/>
+
+    <!--下一步-->
+    <LinearLayout
+        android:id="@+id/ll_style_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_previous_step"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/btn_44_back_sel"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/btn_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/btn_44_p_sel"
+            android:text="完成"
+            android:textColor="#f3b4a4"/>
+
+    </LinearLayout>
+
+    <!--确认、取消-->
+    <LinearLayout
+        android:id="@+id/ll_style_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_neg"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_left_btn_select"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#080808"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/img_line"
+            android:layout_width="0.5dp"
+            android:layout_height="43dp"
+            android:background="#dddddd"/>
+
+        <Button
+            android:id="@+id/btn_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_right_btn_select"
+            android:gravity="center"
+            android:text="确认"
+            android:textColor="#000000"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+</LinearLayout>
