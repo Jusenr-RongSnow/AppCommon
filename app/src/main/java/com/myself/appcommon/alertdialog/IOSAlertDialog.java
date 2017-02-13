@@ -151,6 +151,15 @@ public class IOSAlertDialog {
         return this;
     }
 
+    public IOSAlertDialog removeView(View view) {
+        showLayout = true;
+        if (view == null) {
+            showLayout = false;
+        } else
+            dialog_group.removeView(view);
+        return this;
+    }
+
     public IOSAlertDialog setCancelable(boolean cancel) {
         dialog.setCancelable(cancel);
         return this;

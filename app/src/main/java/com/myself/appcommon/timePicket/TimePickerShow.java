@@ -2,9 +2,11 @@ package com.myself.appcommon.timePicket;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.myself.appcommon.R;
@@ -23,6 +25,7 @@ public class TimePickerShow {
     private Context context;
     private WheelMain wheelMain;
     private WheelHeightAndWeightView mWheelHeightAndWeightView;
+    private View mView;
 
     public TimePickerShow(Context context) {
         super();
@@ -34,7 +37,7 @@ public class TimePickerShow {
     }
 
     public View heightPickerView(String dateStr) {
-        View heightPickerView = View.inflate(context, R.layout.timepicker, null);
+        View heightPickerView = View.inflate(context, R.layout.timepicker1, null);
         mWheelHeightAndWeightView = new WheelHeightAndWeightView(heightPickerView);
 
         mWheelHeightAndWeightView.setEND_INTEGER(240);
@@ -80,7 +83,7 @@ public class TimePickerShow {
         int min = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
 
-        wheelMain.setEND_YEAR(year);// 设置最大年份
+        wheelMain.setEND_YEAR(2030);// 设置最大年份
         wheelMain.initDateTimePicker(year, month, day, hour, min, second);
 
         return timepickerview;
@@ -103,7 +106,7 @@ public class TimePickerShow {
         // int hour = calendar.get(Calendar.HOUR_OF_DAY);
         // int min = calendar.get(Calendar.MINUTE);
         // int second = calendar.get(Calendar.SECOND);
-        wheelMain.setEND_YEAR(year);
+        wheelMain.setEND_YEAR(2030);
         // 若为空显示当前时间
         if (dateStr != null && !dateStr.equals("")) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -124,6 +127,8 @@ public class TimePickerShow {
     }
 
     /**
+     * set headView
+     *
      * @param
      * @return
      */
@@ -138,8 +143,10 @@ public class TimePickerShow {
      * @param textView
      */
     public void timePickerAlertDialog(final TextView textView) {
+        final IOSAlertDialog dialog = new IOSAlertDialog(context);
+
         int s0 = 0, s1 = 0;
-        String toString = textView.getText().toString().trim();
+        final String toString = textView.getText().toString().trim();
         if (toString.contains(".") && toString.length() > 0) {//100.2cm  65.5cm
             String[] split = toString.split("\\.");
             s0 = Integer.parseInt(split[0]);
@@ -147,12 +154,45 @@ public class TimePickerShow {
         }
 
         Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
-        IOSAlertDialog dialog = new IOSAlertDialog(context);
+
+        View view = headView();
+        final TextView tv_height = (TextView) view.findViewById(R.id.tv_height);
+        final TextView tv_weight = (TextView) view.findViewById(R.id.tv_weight);
+        final ImageView iv_img = (ImageView) view.findViewById(R.id.iv_img);
+        tv_height.setTextColor(Color.parseColor("#8B49F6"));
+        tv_weight.setTextColor(Color.parseColor("#959595"));
+        iv_img.setImageResource(R.drawable.step_band_modal_dialogue_01);
+        mView = heightPickerView(toString);
+
+        tv_height.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_height.setTextColor(Color.parseColor("#8B49F6"));
+                tv_weight.setTextColor(Color.parseColor("#959595"));
+                iv_img.setImageResource(R.drawable.step_band_modal_dialogue_01);
+                dialog.removeView(mView);
+                mView = heightPickerView(toString);
+                dialog.setView(mView);
+            }
+        });
+        tv_weight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_height.setTextColor(Color.parseColor("#959595"));
+                tv_weight.setTextColor(Color.parseColor("#8B49F6"));
+                iv_img.setImageResource(R.drawable.step_band_modal_dialogue_02);
+                dialog.removeView(mView);
+                mView = timePickerView("2017-2-13");
+                dialog.setView(mView);
+                textView.setText(getTxtTime("-", "-", "", "", "", ""));
+            }
+        });
+
         dialog.builder();
 //        dialog.setTitle("选择日期");
-        dialog.setHeadView(headView());
+        dialog.setHeadView(view);
         dialog.setButtonStyle(0);
-        dialog.setView(heightPickerView(textView.getText().toString().trim()));
+        dialog.setView(mView);
         dialog.setNegativeButton("", new OnClickListener() {
             @Override
             public void onClick(View v) {

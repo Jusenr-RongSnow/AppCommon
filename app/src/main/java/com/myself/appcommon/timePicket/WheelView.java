@@ -3,6 +3,7 @@ package com.myself.appcommon.timePicket;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -40,7 +41,8 @@ public class WheelView extends View {
     /**
      * 当前值与标签文本颜色
      */
-    private static final int VALUE_TEXT_COLOR = 0xFFf55a00;
+//    private static final int VALUE_TEXT_COLOR = 0xFFf55a00;
+    private static final int VALUE_TEXT_COLOR = Color.parseColor("#313131");
 
     /**
      * 项目文本颜色

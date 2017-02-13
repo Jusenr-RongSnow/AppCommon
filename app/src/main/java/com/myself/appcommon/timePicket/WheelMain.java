@@ -16,7 +16,7 @@ public class WheelMain {
     private WheelView wv_hours;
     private WheelView wv_mins;
     private WheelView wv_second;
-    private int START_YEAR = 1950, END_YEAR;
+    private int START_YEAR = 1999, END_YEAR;
 
     public View getView() {
         return view;

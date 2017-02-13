@@ -33,24 +33,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <!--hours-->
-            <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/hour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <!--mins-->
-            <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/min"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <!--second-->
-            <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/second"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
         </LinearLayout>
 
         <ImageView
