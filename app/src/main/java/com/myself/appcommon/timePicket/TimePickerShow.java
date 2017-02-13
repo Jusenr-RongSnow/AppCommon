@@ -22,36 +22,32 @@ public class TimePickerShow {
 
     private Context context;
     private WheelMain wheelMain;
-    private WheelheightView mWheelheightView;
+    private WheelHeightAndWeightView mWheelHeightAndWeightView;
 
     public TimePickerShow(Context context) {
         super();
         this.context = context;
     }
 
-    public String getData(String str) {
-        return mWheelheightView.getData(str);
+    public String getData(String strInteger, String strDecimal, String strCompany) {
+        return mWheelHeightAndWeightView.getData(strInteger, strDecimal, strCompany);
     }
 
     public View heightPickerView(String dateStr) {
         View heightPickerView = View.inflate(context, R.layout.timepicker, null);
-        mWheelheightView = new WheelheightView(heightPickerView);
+        mWheelHeightAndWeightView = new WheelHeightAndWeightView(heightPickerView);
 
-        mWheelheightView.setEND_INTEGER(240);
-        mWheelheightView.setSTART_INTEGER(50);
+        mWheelHeightAndWeightView.setEND_INTEGER(240);
+        mWheelHeightAndWeightView.setSTART_INTEGER(50);
         // 若为空显示当前时间
-        if (dateStr != null && !dateStr.equals("")) {
-            int s0, s1;
-            if (dateStr.length() > 5) {
-                s0 = Integer.parseInt(dateStr.substring(0, 2));
-                s1 = Integer.parseInt(dateStr.substring(2, 3));
-            } else {
-                s0 = Integer.parseInt(dateStr.substring(0, 1));
-                s1 = Integer.parseInt(dateStr.substring(1, 2));
-            }
-            mWheelheightView.initDateTimePicker(s0, s1, "cm");
+        if (dateStr != null && !dateStr.equals("") && !dateStr.equals("null")) {
+            String[] split = dateStr.split("\\.");
+            int s0 = Integer.parseInt(split[0]);
+            int s1 = Integer.parseInt(split[1].substring(0, 1));
+
+            mWheelHeightAndWeightView.initDateTimePicker(s0, s1, "cm");
         } else {
-            mWheelheightView.initDateTimePicker(50, 0, "cm");
+            mWheelHeightAndWeightView.initDateTimePicker(50, 0, "cm");
         }
 
         return heightPickerView;
@@ -142,23 +138,21 @@ public class TimePickerShow {
      * @param textView
      */
     public void timePickerAlertDialog(final TextView textView) {
-        String toString = textView.getText().toString().trim();
         int s0 = 0, s1 = 0;
-        if (toString.length() != 0 && toString.length() > 5) {
-            s0 = Integer.parseInt(toString.substring(0, 2));
-            s1 = Integer.parseInt(toString.substring(2, 3));
+        String toString = textView.getText().toString().trim();
+        if (toString.contains("\\.") && toString.length() != 0) {//100.2cm  65.5cm
+            String[] split = toString.split("\\.");
+            s0 = Integer.parseInt(split[0]);
+            s1 = Integer.parseInt(split[1].substring(0, 1));
         }
-        if (toString.length() != 0 && toString.length() < 6) {
-            s0 = Integer.parseInt(toString.substring(0, 1));
-            s1 = Integer.parseInt(toString.substring(1, 2));
-        }
+
         Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
         IOSAlertDialog dialog = new IOSAlertDialog(context);
         dialog.builder();
 //        dialog.setTitle("选择日期");
         dialog.setHeadView(headView());
         dialog.setButtonStyle(0);
-        dialog.setView(heightPickerView(textView.getText().toString()));
+        dialog.setView(heightPickerView(textView.getText().toString().trim()));
         dialog.setNegativeButton("", new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,7 +164,7 @@ public class TimePickerShow {
             @Override
             public void onClick(View v) {
 //                textView.setText(getTxtTime("-", "-", " ", ":", ":", ""));
-                textView.setText(getData(""));
+                textView.setText(getData(".", "", ""));
 //                Toast.makeText(context, getData(""), Toast.LENGTH_SHORT).show();
             }
         });

@@ -5,7 +5,7 @@ import android.view.View;
 import com.myself.appcommon.R;
 
 /**
- * Description:
+ * Description: 身高、体重滚动选择器
  * Copyright  : Copyright (c) 2016
  * Email      : jusenr@163.com
  * Company    : 葡萄科技
@@ -13,7 +13,7 @@ import com.myself.appcommon.R;
  * Date       : 2017/2/10 18:47.
  */
 
-public class WheelheightView {
+public class WheelHeightAndWeightView {
 
     private View view;
     private WheelView wv_integer;
@@ -23,14 +23,14 @@ public class WheelheightView {
     private int START_INTEGER = 50, END_INTEGER;
 
 
-    public WheelheightView(View view) {
+    public WheelHeightAndWeightView(View view) {
         super();
         this.view = view;
         setView(view);
 //        initDateTimePicker();
     }
 
-    public WheelheightView(View view, boolean hasSelect) {
+    public WheelHeightAndWeightView(View view, boolean hasSelect) {
         super();
         this.view = view;
         setView(view);
@@ -59,14 +59,14 @@ public class WheelheightView {
         if (integer != -1) {
             wv_integer.setAdapter(new NumericWheelAdapter(50, 240));
             wv_integer.setCyclic(false);// 可循环滚动
-            wv_integer.setLabel("");//单位
-            wv_integer.setCurrentItem(integer /*+ START_INTEGER*/);
+            wv_integer.setLabel(".");//单位
+            wv_integer.setCurrentItem(integer - START_INTEGER);// 初始化时显示的数据
         } else {
             wv_integer.setVisibility(View.GONE);
         }
 
         // 小数部分
-        if (integer != -1) {
+        if (decimal != -1) {
             wv_decimal.setAdapter(new NumericWheelAdapter(0, 9));
             wv_decimal.setCyclic(false);// 可循环滚动
             wv_decimal.setLabel("");//单位
@@ -88,10 +88,12 @@ public class WheelheightView {
     /**
      * 获得选中时间
      *
-     * @param str 间开符号
+     * @param strInteger 间开符号
+     * @param strDecimal 间开符号
+     * @param strInteger 间开符号
      * @returndecimal
      */
-    public String getData(String str) {
+    public String getData(String strInteger, String strDecimal, String strCompany) {
         StringBuffer sb = new StringBuffer();
         String integer = "";
         String decimal = "";
@@ -102,7 +104,7 @@ public class WheelheightView {
             if (wv_integer.getCurrentItem() + 1 <= 9) {
                 integer = new StringBuffer(integer).toString();
             }
-            integer = new StringBuffer(integer + str).toString();
+            integer = new StringBuffer(integer + strInteger).toString();
         }
 
         if (wv_decimal.getVisibility() != View.GONE) {
@@ -110,11 +112,11 @@ public class WheelheightView {
             if (wv_decimal.getCurrentItem() <= 9) {
                 decimal = new StringBuffer(decimal).toString();
             }
-            decimal = new StringBuffer(decimal + str).toString();
+            decimal = new StringBuffer(decimal + strDecimal).toString();
         }
 
         if (wv_decimal.getVisibility() != View.GONE) {
-            company = "cm";
+            company = "cm" + strCompany;
         }
         sb.append(integer).append(decimal).append(company);
 

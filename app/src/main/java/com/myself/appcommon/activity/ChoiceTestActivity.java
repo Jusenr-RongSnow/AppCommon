@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.myself.appcommon.R;
 import com.myself.appcommon.base.BaseActivity;
 import com.myself.appcommon.timePicket.TimePickerShow;
-import com.myself.appcommon.timePicket.WheelheightView;
+import com.myself.appcommon.timePicket.WheelHeightAndWeightView;
 
 public class ChoiceTestActivity extends BaseActivity implements View.OnClickListener {
 
@@ -69,7 +69,7 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new WheelheightView(view);
+                new WheelHeightAndWeightView(view);
             }
         });
     }

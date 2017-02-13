@@ -343,7 +343,7 @@ public class WheelView extends View {
             labelPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
             labelPaint.density = getResources().getDisplayMetrics().density;
             labelPaint.setColor(VALUE_TEXT_COLOR);
-            labelPaint.setTextSize(textSize(11));
+            labelPaint.setTextSize(textSize(18));
         }
 
         if (centerDrawable == null) {
