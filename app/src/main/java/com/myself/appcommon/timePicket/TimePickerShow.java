@@ -2,10 +2,10 @@ package com.myself.appcommon.timePicket;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.myself.appcommon.R;
 import com.myself.appcommon.alertdialog.IOSAlertDialog;
@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.myself.appcommon.activity.WebviewActivity.TAG;
 
 @SuppressLint("SimpleDateFormat")
 public class TimePickerShow {
@@ -27,21 +29,29 @@ public class TimePickerShow {
         this.context = context;
     }
 
-    public String getData() {
-        return mWheelheightView.getData("");
+    public String getData(String str) {
+        return mWheelheightView.getData(str);
     }
 
     public View heightPickerView(String dateStr) {
         View heightPickerView = View.inflate(context, R.layout.timepicker, null);
         mWheelheightView = new WheelheightView(heightPickerView);
 
-        mWheelheightView.setEND_INTEGER(300);
+        mWheelheightView.setEND_INTEGER(240);
         mWheelheightView.setSTART_INTEGER(50);
         // 若为空显示当前时间
         if (dateStr != null && !dateStr.equals("")) {
-            mWheelheightView.initDateTimePicker(120, 5, "cm");
+            int s0, s1;
+            if (dateStr.length() > 5) {
+                s0 = Integer.parseInt(dateStr.substring(0, 2));
+                s1 = Integer.parseInt(dateStr.substring(2, 3));
+            } else {
+                s0 = Integer.parseInt(dateStr.substring(0, 1));
+                s1 = Integer.parseInt(dateStr.substring(1, 2));
+            }
+            mWheelheightView.initDateTimePicker(s0, s1, "cm");
         } else {
-            mWheelheightView.initDateTimePicker(120, 5, "cm");
+            mWheelheightView.initDateTimePicker(50, 0, "cm");
         }
 
         return heightPickerView;
@@ -132,6 +142,17 @@ public class TimePickerShow {
      * @param textView
      */
     public void timePickerAlertDialog(final TextView textView) {
+        String toString = textView.getText().toString().trim();
+        int s0 = 0, s1 = 0;
+        if (toString.length() != 0 && toString.length() > 5) {
+            s0 = Integer.parseInt(toString.substring(0, 2));
+            s1 = Integer.parseInt(toString.substring(2, 3));
+        }
+        if (toString.length() != 0 && toString.length() < 6) {
+            s0 = Integer.parseInt(toString.substring(0, 1));
+            s1 = Integer.parseInt(toString.substring(1, 2));
+        }
+        Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
         IOSAlertDialog dialog = new IOSAlertDialog(context);
         dialog.builder();
 //        dialog.setTitle("选择日期");
@@ -148,8 +169,9 @@ public class TimePickerShow {
         dialog.setPositiveButton("完成", new OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText(getTxtTime("-", "-", " ", ":", ":", ""));
-                Toast.makeText(context, getData(), Toast.LENGTH_SHORT).show();
+//                textView.setText(getTxtTime("-", "-", " ", ":", ":", ""));
+                textView.setText(getData(""));
+//                Toast.makeText(context, getData(""), Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

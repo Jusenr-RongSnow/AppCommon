@@ -4,9 +4,6 @@ import android.view.View;
 
 import com.myself.appcommon.R;
 
-import static com.myself.appcommon.R.id.day;
-import static com.myself.appcommon.R.id.month;
-
 /**
  * Description:
  * Copyright  : Copyright (c) 2016
@@ -23,7 +20,7 @@ public class WheelheightView {
     private WheelView wv_decimal;
     private WheelView wv_company;
 
-    private int START_INTEGER = 50, END_INTEGER = 300;
+    private int START_INTEGER = 50, END_INTEGER;
 
 
     public WheelheightView(View view) {
@@ -63,7 +60,7 @@ public class WheelheightView {
             wv_integer.setAdapter(new NumericWheelAdapter(50, 240));
             wv_integer.setCyclic(false);// 可循环滚动
             wv_integer.setLabel("");//单位
-            wv_integer.setCurrentItem(integer);
+            wv_integer.setCurrentItem(integer /*+ START_INTEGER*/);
         } else {
             wv_integer.setVisibility(View.GONE);
         }
@@ -92,7 +89,7 @@ public class WheelheightView {
      * 获得选中时间
      *
      * @param str 间开符号
-     * @return
+     * @returndecimal
      */
     public String getData(String str) {
         StringBuffer sb = new StringBuffer();
@@ -101,7 +98,7 @@ public class WheelheightView {
         String company = "";
 
         if (wv_integer.getVisibility() != View.GONE) {
-            integer = String.valueOf(wv_integer.getCurrentItem());
+            integer = String.valueOf(wv_integer.getCurrentItem() + START_INTEGER);
             if (wv_integer.getCurrentItem() + 1 <= 9) {
                 integer = new StringBuffer(integer).toString();
             }

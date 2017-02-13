@@ -61,10 +61,10 @@ public class ScreenInfo {
 
 	public ScreenInfo(Activity activity){
 		 this.activity = activity;
-		 ini();
+		 init();
 	 }
 	 
-	 private void ini(){
+	 private void init(){
 		 DisplayMetrics metric = new DisplayMetrics();
 		 activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
 	     width = metric.widthPixels;  
