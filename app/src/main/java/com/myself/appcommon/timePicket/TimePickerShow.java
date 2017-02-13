@@ -40,7 +40,7 @@ public class TimePickerShow {
         mWheelHeightAndWeightView.setEND_INTEGER(240);
         mWheelHeightAndWeightView.setSTART_INTEGER(50);
         // 若为空显示当前时间
-        if (dateStr != null && !dateStr.equals("") && !dateStr.equals("null")) {
+        if (dateStr.contains(".") && dateStr.length() > 0 && !dateStr.equals("null")) {
             String[] split = dateStr.split("\\.");
             int s0 = Integer.parseInt(split[0]);
             int s1 = Integer.parseInt(split[1].substring(0, 1));
@@ -140,7 +140,7 @@ public class TimePickerShow {
     public void timePickerAlertDialog(final TextView textView) {
         int s0 = 0, s1 = 0;
         String toString = textView.getText().toString().trim();
-        if (toString.contains("\\.") && toString.length() != 0) {//100.2cm  65.5cm
+        if (toString.contains(".") && toString.length() > 0) {//100.2cm  65.5cm
             String[] split = toString.split("\\.");
             s0 = Integer.parseInt(split[0]);
             s1 = Integer.parseInt(split[1].substring(0, 1));
