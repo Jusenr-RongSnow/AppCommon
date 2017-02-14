@@ -24,6 +24,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mTestReact2;
     private Button mTestWebview;
     private Button mTestChoice;
+    private Button mTestChoice2;
 
     @Override
     public boolean needTranslucent() {
@@ -55,6 +56,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mTestReact2 = (Button) findViewById(R.id.test_react2);
         mTestWebview = (Button) findViewById(R.id.test_webview);
         mTestChoice = (Button) findViewById(R.id.test_choice);
+        mTestChoice2 = (Button) findViewById(R.id.test_choice2);
     }
 
     @Override
@@ -96,6 +98,13 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 goToActivity(ChoiceTestActivity.class, false);
+            }
+        });
+        mTestChoice2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(ChoiceTest2Activity.class, false);
             }
         });
     }

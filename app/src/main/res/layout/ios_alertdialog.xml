@@ -90,7 +90,7 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/btn_44_p_sel"
             android:text="完成"
-            android:textColor="#f3b4a4"/>
+            android:textColor="#fff"/>
 
     </LinearLayout>
 

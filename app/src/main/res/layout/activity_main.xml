@@ -44,7 +44,14 @@
             android:id="@+id/test_choice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choice"
+            android:text="Choice1"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/test_choice2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choice2"
             android:textAllCaps="false"/>
     </LinearLayout>
 </ScrollView>
