@@ -10,6 +10,8 @@ import com.myself.appcommon.base.BaseActivity;
 import com.myself.appcommon.timePicket.TimePickerShow;
 import com.myself.appcommon.timePicket.WheelHeightAndWeightView;
 
+import java.util.Random;
+
 public class ChoiceTestActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout linearLayout;
@@ -54,6 +56,7 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
     @Override
     public void initListener() {
         final TextView view = new TextView(this);
+
         getTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +73,25 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 new WheelHeightAndWeightView(view);
+                getRandom();
             }
         });
+    }
+
+
+    private void getRandom() {
+        double random0 = Math.random() * 100;
+        double random1 = Math.random() * 10;
+        final String str0 = String.valueOf(random0).split("\\.")[0];
+        final String str1 = String.valueOf(random1).split("\\.")[0];
+        final String str = str0 + "." + str1;
+        System.out.println(str0);
+        System.out.println(str1);
+        int nextInt = new Random().nextInt(51);
+        System.out.println(nextInt);
+        final int parseInt = Integer.parseInt(str0);
+        if (parseInt > 49)
+            dateText2.setText(str);
     }
 
     @Override

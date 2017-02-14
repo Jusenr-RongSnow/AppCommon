@@ -153,7 +153,6 @@ public class TimePickerShow {
             Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
         }
 
-
         View view = headView();
         final TextView tv_height = (TextView) view.findViewById(R.id.tv_height);
         final TextView tv_weight = (TextView) view.findViewById(R.id.tv_weight);
