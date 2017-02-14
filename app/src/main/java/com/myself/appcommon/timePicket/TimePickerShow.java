@@ -3,6 +3,7 @@ package com.myself.appcommon.timePicket;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,28 +33,26 @@ public class TimePickerShow {
         this.context = context;
     }
 
-    public String getData(String strInteger, String strDecimal, String strCompany) {
-        return mWheelHeightAndWeightView.getData(strInteger, strDecimal, strCompany);
+    public String getHeightAndWeightData(String strInteger, String strDecimal, String strCompany) {
+        return mWheelHeightAndWeightView.getHeightAndWeightData(strInteger, strDecimal, strCompany);
     }
 
-    public View heightPickerView(String dateStr) {
-        View heightPickerView = View.inflate(context, R.layout.timepicker1, null);
-        mWheelHeightAndWeightView = new WheelHeightAndWeightView(heightPickerView);
-
-        mWheelHeightAndWeightView.setEND_INTEGER(240);
-        mWheelHeightAndWeightView.setSTART_INTEGER(50);
+    public View heightAndWeightPickerView(String dataStr, int startInteger, int endInteger, String company) {
+        View mHeightAndWeightPickerView = View.inflate(context, R.layout.timepicker1, null);
+        mWheelHeightAndWeightView = new WheelHeightAndWeightView(mHeightAndWeightPickerView);
+        mWheelHeightAndWeightView.setSTART_INTEGER(startInteger);
+        mWheelHeightAndWeightView.setEND_INTEGER(endInteger);
         // 若为空显示当前时间
-        if (dateStr.contains(".") && dateStr.length() > 0 && !dateStr.equals("null")) {
-            String[] split = dateStr.split("\\.");
+        if (dataStr.contains(".") && !TextUtils.isEmpty(dataStr) && !"null".equals(dataStr)) {
+            String[] split = dataStr.split("\\.");
             int s0 = Integer.parseInt(split[0]);
             int s1 = Integer.parseInt(split[1].substring(0, 1));
-
-            mWheelHeightAndWeightView.initDateTimePicker(s0, s1, "cm");
+            mWheelHeightAndWeightView.initHeightAndWeightPicker(s0, s1, company);
         } else {
-            mWheelHeightAndWeightView.initDateTimePicker(50, 0, "cm");
+            mWheelHeightAndWeightView.initHeightAndWeightPicker(startInteger, 0, company);
         }
 
-        return heightPickerView;
+        return mHeightAndWeightPickerView;
     }
 
     /**
@@ -108,7 +107,7 @@ public class TimePickerShow {
         // int second = calendar.get(Calendar.SECOND);
         wheelMain.setEND_YEAR(2030);
         // 若为空显示当前时间
-        if (dateStr != null && !dateStr.equals("")) {
+        if (dateStr.length() > 0 && !"null".equals(dateStr)) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date date = format.parse(dateStr);
@@ -144,25 +143,22 @@ public class TimePickerShow {
      */
     public void timePickerAlertDialog(final TextView textView) {
         final IOSAlertDialog dialog = new IOSAlertDialog(context);
-
-        int s0 = 0, s1 = 0;
         final String toString = textView.getText().toString().trim();
-        if (toString.contains(".") && toString.length() > 0) {//100.2cm  65.5cm
+        Log.e(TAG, "timePickerAlertDialog: toString=" + toString);
+        //100.2cm  65.5cm   100.5kg 15.5kg
+        if (toString.contains(".") && !TextUtils.isEmpty(toString) && !"null".equals(toString)) {
             String[] split = toString.split("\\.");
-            s0 = Integer.parseInt(split[0]);
-            s1 = Integer.parseInt(split[1].substring(0, 1));
+            int s0 = Integer.parseInt(split[0]);
+            int s1 = Integer.parseInt(split[1].substring(0, 1));
+            Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
         }
 
-        Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
 
         View view = headView();
         final TextView tv_height = (TextView) view.findViewById(R.id.tv_height);
         final TextView tv_weight = (TextView) view.findViewById(R.id.tv_weight);
         final ImageView iv_img = (ImageView) view.findViewById(R.id.iv_img);
-        tv_height.setTextColor(Color.parseColor("#8B49F6"));
-        tv_weight.setTextColor(Color.parseColor("#959595"));
-        iv_img.setImageResource(R.drawable.step_band_modal_dialogue_01);
-        mView = heightPickerView(toString);
+        mView = heightAndWeightPickerView(toString, 50, 240, "CM");
 
         tv_height.setOnClickListener(new OnClickListener() {
             @Override
@@ -171,7 +167,7 @@ public class TimePickerShow {
                 tv_weight.setTextColor(Color.parseColor("#959595"));
                 iv_img.setImageResource(R.drawable.step_band_modal_dialogue_01);
                 dialog.removeView(mView);
-                mView = heightPickerView(toString);
+                mView = heightAndWeightPickerView(toString, 50, 240, "CM");
                 dialog.setView(mView);
             }
         });
@@ -182,9 +178,8 @@ public class TimePickerShow {
                 tv_weight.setTextColor(Color.parseColor("#8B49F6"));
                 iv_img.setImageResource(R.drawable.step_band_modal_dialogue_02);
                 dialog.removeView(mView);
-                mView = timePickerView("2017-2-13");
+                mView = heightAndWeightPickerView(toString, 10, 50, "KG");
                 dialog.setView(mView);
-                textView.setText(getTxtTime("-", "-", "", "", "", ""));
             }
         });
 
@@ -204,7 +199,7 @@ public class TimePickerShow {
             @Override
             public void onClick(View v) {
 //                textView.setText(getTxtTime("-", "-", " ", ":", ":", ""));
-                textView.setText(getData(".", "", ""));
+                textView.setText(getHeightAndWeightData(".", "", ""));
 //                Toast.makeText(context, getData(""), Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,5 +1,6 @@
 package com.myself.appcommon.timePicket;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.myself.appcommon.R;
@@ -20,7 +21,7 @@ public class WheelHeightAndWeightView {
     private WheelView wv_decimal;
     private WheelView wv_company;
 
-    private int START_INTEGER = 50, END_INTEGER;
+    private int START_INTEGER = 0, END_INTEGER;
 
 
     public WheelHeightAndWeightView(View view) {
@@ -36,20 +37,26 @@ public class WheelHeightAndWeightView {
         setView(view);
     }
 
-
-    public void initDateTimePicker(int integer, int decimal, String company) {
+    /**
+     * 初始化身高选择控件
+     *
+     * @param integer
+     * @param decimal
+     * @param company
+     */
+    public void initHeightAndWeightPicker(int integer, int decimal, String company) {
         // 添加数据并将其转换为list,方便之后的判断
 //        List<Integer> list_integers = new ArrayList<>();
 //        List<Integer> list_decimal = new ArrayList<>();
 //
-//        for (int i = START_INTEGER; i <= END_INTEGER; i++) {
+//        for (int i = START_INTEGER; i <= START_INTEGER; i++) {
 //            list_integers.add(i);
 //        }
-//        Log.e(TAG, "initDateTimePicker: " + list_integers.toString());//50~300
+//        Log.e(TAG, "initPicker: " + list_integers.toString());//50~240
 //        for (int i = 0; i < 10; i++) {
 //            list_decimal.add(i);
 //        }
-//        Log.e(TAG, "initDateTimePicker: " + list_decimal.toString());//0~9
+//        Log.e(TAG, "initPicker: " + list_decimal.toString());//0~9
 
         wv_integer = (WheelView) view.findViewById(R.id.year);
         wv_decimal = (WheelView) view.findViewById(R.id.month);
@@ -57,8 +64,8 @@ public class WheelHeightAndWeightView {
 
         // 整数部分
         if (integer != -1) {
-            wv_integer.setAdapter(new NumericWheelAdapter(50, 240));
-            wv_integer.setCyclic(false);// 可循环滚动
+            wv_integer.setAdapter(new NumericWheelAdapter(START_INTEGER, END_INTEGER));
+            wv_integer.setCyclic(false);// 不可循环滚动
             wv_integer.setLabel(".");//单位
             wv_integer.setCurrentItem(integer - START_INTEGER);// 初始化时显示的数据
         } else {
@@ -68,7 +75,7 @@ public class WheelHeightAndWeightView {
         // 小数部分
         if (decimal != -1) {
             wv_decimal.setAdapter(new NumericWheelAdapter(0, 9));
-            wv_decimal.setCyclic(false);// 可循环滚动
+            wv_decimal.setCyclic(false);// 不可循环滚动
             wv_decimal.setLabel("");//单位
             wv_decimal.setCurrentItem(decimal);
         } else {
@@ -78,7 +85,7 @@ public class WheelHeightAndWeightView {
         // 单位
         if (company != null) {
             wv_company.setCyclic(false);// 不可循环滚动
-            wv_company.setLabel("cm");
+            wv_company.setLabel(company);
 //            wv_company.setCurrentItem(0);
         } else {
             wv_company.setVisibility(View.GONE);
@@ -86,14 +93,14 @@ public class WheelHeightAndWeightView {
     }
 
     /**
-     * 获得选中时间
+     * 获得选中身高
      *
-     * @param strInteger 间开符号
-     * @param strDecimal 间开符号
-     * @param strInteger 间开符号
+     * @param strInteger 间开符号1
+     * @param strDecimal 间开符号2
+     * @param strInteger 间开符号3
      * @returndecimal
      */
-    public String getData(String strInteger, String strDecimal, String strCompany) {
+    public String getHeightAndWeightData(String strInteger, String strDecimal, String strCompany) {
         StringBuffer sb = new StringBuffer();
         String integer = "";
         String decimal = "";
@@ -115,14 +122,17 @@ public class WheelHeightAndWeightView {
             decimal = new StringBuffer(decimal + strDecimal).toString();
         }
 
-        if (wv_decimal.getVisibility() != View.GONE) {
-            company = "cm" + strCompany;
+        if (wv_company.getVisibility() != View.GONE) {
+//            company = String.valueOf(wv_company.getCurrentItem());
+//            Log.e(TAG, "getHeightData: company=" + company);
+            String label = wv_company.getLabel();
+            label = TextUtils.isEmpty(label) ? "" : label;
+            company = new StringBuffer(label + strCompany).toString();
         }
         sb.append(integer).append(decimal).append(company);
 
         return sb.toString();
     }
-
 
     public View getView() {
         return view;
