@@ -18,7 +18,12 @@ import android.widget.TextView;
 
 import com.myself.appcommon.R;
 
+/**
+ *
+ */
 public class IOSAlertDialog {
+    public static final String TAG = IOSAlertDialog.class.getSimpleName();
+
     private Context context;
     private Dialog dialog;
     private LinearLayout lLayout_bg;
@@ -31,6 +36,7 @@ public class IOSAlertDialog {
     private LinearLayout ll_style_1;
     private LinearLayout ll_style_2;
     private Button btn_neg;
+    private Button btn_next_step;
     private Button btn_pos;
     private Button btn_previous_step;
     private Button btn_complete;
@@ -43,6 +49,8 @@ public class IOSAlertDialog {
     private boolean showLayout = false;
     private boolean showPosBtn = false;
     private boolean showNegBtn = false;
+    private boolean showNextBtn = false;
+    private boolean showCompleteBtn = false;
     private boolean showButtonStyle = false;
 
     public IOSAlertDialog(Context context) {
@@ -76,6 +84,8 @@ public class IOSAlertDialog {
 
         btn_neg = (Button) view.findViewById(R.id.btn_neg);
         btn_neg.setVisibility(View.GONE);
+        btn_next_step = (Button) view.findViewById(R.id.btn_next_step);
+        btn_next_step.setVisibility(View.GONE);
         btn_pos = (Button) view.findViewById(R.id.btn_pos);
         btn_pos.setVisibility(View.GONE);
 
@@ -165,59 +175,111 @@ public class IOSAlertDialog {
         return this;
     }
 
-    public IOSAlertDialog setPositiveButton(String text, final OnClickListener listener) {
-        showPosBtn = true;
-        if (showButtonStyle) {
-            if (TextUtils.isEmpty(text)) {
-                btn_complete.setText(text);
-            }
-            btn_complete.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(v);
-                    dialog.dismiss();
-                }
-            });
-        } else {
-            if (TextUtils.isEmpty(text)) {
-                btn_pos.setText(text);
-            }
-            btn_pos.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(v);
-                    dialog.dismiss();
-                }
-            });
+    public IOSAlertDialog setPreviousStepButton(String text, final OnClickListener listener) {
+        showButtonStyle = true;
+        if (!TextUtils.isEmpty(text)) {
+            btn_previous_step.setText(text);
         }
+        btn_previous_step.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLayout(true);
+                listener.onClick(v);
+            }
+        });
         return this;
     }
 
-    public IOSAlertDialog setNegativeButton(String text, final OnClickListener listener) {
-        showNegBtn = true;
-        if (showButtonStyle) {
-            if (TextUtils.isEmpty(text)) {
-                btn_previous_step.setText(text);
-            }
-            btn_previous_step.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(v);
-                    dialog.dismiss();
-                }
-            });
-        } else {
-            if (TextUtils.isEmpty(text)) {
-                btn_neg.setText(text);
-            }
-            btn_neg.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(v);
-                    dialog.dismiss();
-                }
-            });
+    /**
+     * nextStep
+     *
+     * @param text
+     * @param listener
+     * @return
+     */
+    public IOSAlertDialog setNextStepButton(String text, final OnClickListener listener) {
+        showNextBtn = true;
+        showButtonStyle = true;
+        if (!TextUtils.isEmpty(text)) {
+            btn_next_step.setText(text);
         }
+        btn_next_step.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLayout(false);
+                listener.onClick(v);
+            }
+        });
+        return this;
+    }
+
+    /**
+     * complete
+     *
+     * @param text
+     * @param listener
+     * @return
+     */
+    public IOSAlertDialog setCompleteButton(String text, final OnClickListener listener) {
+        showButtonStyle = true;
+        if (!TextUtils.isEmpty(text)) {
+            btn_complete.setText(text);
+        }
+        btn_complete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(v);
+                dialog.dismiss();
+            }
+        });
+        return this;
+    }
+
+    /**
+     * 取消
+     *
+     * @param text
+     * @param listener
+     * @return
+     */
+    //hide
+    public IOSAlertDialog setNegativeButton(final String text, final OnClickListener listener) {
+        showNegBtn = true;
+        showButtonStyle = false;
+        if (!TextUtils.isEmpty(text)) {
+            btn_neg.setText(text);
+        }
+        btn_neg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(v);
+                dialog.dismiss();
+            }
+        });
+        return this;
+    }
+
+    /**
+     * 确认
+     *
+     * @param text
+     * @param listener
+     * @return
+     */
+    //hide
+    public IOSAlertDialog setPositiveButton(String text, final OnClickListener listener) {
+        showPosBtn = true;
+        showButtonStyle = false;
+        if (!TextUtils.isEmpty(text)) {
+            btn_pos.setText(text);
+        }
+        btn_pos.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(v);
+                dialog.dismiss();
+            }
+        });
         return this;
     }
 
@@ -227,9 +289,8 @@ public class IOSAlertDialog {
         return this;
     }
 
-    private void setLayout() {
+    private void setLayout(boolean b) {
         if (!showTitle && !showMsg) {
-//            txt_title.setText("提示");
             txt_title.setText("");
             txt_title.setVisibility(View.VISIBLE);
         }
@@ -275,14 +336,6 @@ public class IOSAlertDialog {
                     dialog.dismiss();
                 }
             });
-
-            btn_complete.setVisibility(View.VISIBLE);
-            btn_complete.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
         }
 
         if (showPosBtn && showNegBtn) {
@@ -291,28 +344,35 @@ public class IOSAlertDialog {
             btn_neg.setVisibility(View.VISIBLE);
 //            btn_neg.setBackgroundResource(R.drawable.dialog_left_btn_select);
             img_line.setVisibility(View.VISIBLE);
-
-            btn_previous_step.setVisibility(View.VISIBLE);
-            btn_complete.setVisibility(View.VISIBLE);
         }
 
         if (showPosBtn && !showNegBtn) {
             btn_pos.setVisibility(View.VISIBLE);
             // btn_pos.setBackgroundResource(R.drawable.alertdialog_single_selector);
-
-            btn_complete.setVisibility(View.VISIBLE);
         }
 
         if (!showPosBtn && showNegBtn) {
             btn_neg.setVisibility(View.VISIBLE);
             // btn_neg.setBackgroundResource(R.drawable.alertdialog_single_selector);
+        }
 
+        if (b) {
+            btn_next_step.setVisibility(View.VISIBLE);
+            btn_previous_step.setVisibility(View.GONE);
+            btn_complete.setVisibility(View.GONE);
+        } else {
+            btn_next_step.setVisibility(View.GONE);
             btn_previous_step.setVisibility(View.VISIBLE);
+            btn_complete.setVisibility(View.VISIBLE);
         }
     }
 
     public void show() {
-        setLayout();
+        setLayout(true);
         dialog.show();
+    }
+
+    public void dismiss() {
+        dialog.dismiss();
     }
 }

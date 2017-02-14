@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.myself.appcommon.R;
 import com.myself.appcommon.alertdialog.IOSAlertDialog;
@@ -17,16 +18,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
-import static com.myself.appcommon.activity.WebviewActivity.TAG;
 
 @SuppressLint("SimpleDateFormat")
 public class TimePickerShow {
+    public static final String TAG = TimePickerShow.class.getSimpleName();
 
     private Context context;
     private WheelMain wheelMain;
     private WheelHeightAndWeightView mWheelHeightAndWeightView;
     private View mView;
+
+    private IOSAlertDialog dialog;
+    private TextView mTvHeight;
+    private TextView mTvWeight;
+    private ImageView mIvImg;
 
     public TimePickerShow(Context context) {
         super();
@@ -142,66 +149,119 @@ public class TimePickerShow {
      * @param textView
      */
     public void timePickerAlertDialog(final TextView textView) {
-        final IOSAlertDialog dialog = new IOSAlertDialog(context);
-        final String toString = textView.getText().toString().trim();
-        Log.e(TAG, "timePickerAlertDialog: toString=" + toString);
-        //100.2cm  65.5cm   100.5kg 15.5kg
-        if (toString.contains(".") && !TextUtils.isEmpty(toString) && !"null".equals(toString)) {
-            String[] split = toString.split("\\.");
-            int s0 = Integer.parseInt(split[0]);
-            int s1 = Integer.parseInt(split[1].substring(0, 1));
-            Log.e(TAG, "timePickerAlertDialog: \r\ns0=" + s0 + "\r\ns1=" + s1);
-        }
+        if (dialog == null)
+            dialog = new IOSAlertDialog(context);
+        final StringBuffer stringBuffer = new StringBuffer();
+        String toString = textView.getText().toString().trim();
+        Log.e(TAG, "toString=" + toString);
+
+        int random0 = new Random().nextInt(191) + 50;
+        int random1 = new Random().nextInt(41) + 10;
+        int random2 = new Random().nextInt(10);
+        final String str0 = String.valueOf(random0) + "." + String.valueOf(random2);
+        final String str1 = String.valueOf(random1) + "." + String.valueOf(random2);
+        Log.e(TAG, "str0=" + str0);
+        Log.e(TAG, "str1=" + str1);
 
         View view = headView();
-        final TextView tv_height = (TextView) view.findViewById(R.id.tv_height);
-        final TextView tv_weight = (TextView) view.findViewById(R.id.tv_weight);
-        final ImageView iv_img = (ImageView) view.findViewById(R.id.iv_img);
-        mView = heightAndWeightPickerView(toString, 50, 240, "CM");
+        mTvHeight = (TextView) view.findViewById(R.id.tv_height);
+        mTvWeight = (TextView) view.findViewById(R.id.tv_weight);
+        mIvImg = (ImageView) view.findViewById(R.id.iv_img);
+        mView = heightAndWeightPickerView(str0, 50, 240, "CM");
 
-        tv_height.setOnClickListener(new OnClickListener() {
+        mTvHeight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_height.setTextColor(Color.parseColor("#8B49F6"));
-                tv_weight.setTextColor(Color.parseColor("#959595"));
-                iv_img.setImageResource(R.drawable.step_band_modal_dialogue_01);
-                dialog.removeView(mView);
-                mView = heightAndWeightPickerView(toString, 50, 240, "CM");
-                dialog.setView(mView);
+                upTask(str0);
             }
         });
-        tv_weight.setOnClickListener(new OnClickListener() {
+        mTvWeight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_height.setTextColor(Color.parseColor("#959595"));
-                tv_weight.setTextColor(Color.parseColor("#8B49F6"));
-                iv_img.setImageResource(R.drawable.step_band_modal_dialogue_02);
-                dialog.removeView(mView);
-                mView = heightAndWeightPickerView(toString, 10, 50, "KG");
-                dialog.setView(mView);
+                downTask(str1);
             }
         });
 
         dialog.builder();
 //        dialog.setTitle("选择日期");
+//        dialog.setButtonStyle(0);
         dialog.setHeadView(view);
-        dialog.setButtonStyle(0);
         dialog.setView(mView);
-        dialog.setNegativeButton("", new OnClickListener() {
+
+        /**
+         * 上一步
+         */
+        dialog.setPreviousStepButton("", new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                stringBuffer.delete(0, stringBuffer.length());
+                upTask(str0);
             }
         });
 
-        dialog.setPositiveButton("完成", new OnClickListener() {
+        /**
+         * 下一步
+         */
+        dialog.setNextStepButton("下一步", new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String heightData = getHeightAndWeightData(".", "", "");
+                Log.e(TAG, "onClick: 下一步heightData=" + heightData);
+                stringBuffer.append(heightData);
+                downTask(str1);
+            }
+        });
+
+        /**
+         * 完成
+         */
+        dialog.setCompleteButton("完成", new OnClickListener() {
             @Override
             public void onClick(View v) {
 //                textView.setText(getTxtTime("-", "-", " ", ":", ":", ""));
-                textView.setText(getHeightAndWeightData(".", "", ""));
-//                Toast.makeText(context, getData(""), Toast.LENGTH_SHORT).show();
+                String weightData = getHeightAndWeightData(".", "", "");
+                Log.e(TAG, "onClick: 完成weightData=" + weightData);
+                stringBuffer.append(weightData);
+                Toast.makeText(context, stringBuffer.toString(), Toast.LENGTH_SHORT).show();
+                textView.setText(stringBuffer.toString());
+                Log.e(TAG, "onClick: " + stringBuffer.toString());
             }
         });
+
+//        dialog.setNegativeButton("取消", new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        dialog.setPositiveButton("确认", new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String weightData = getHeightAndWeightData(".", "", "");
+//                Toast.makeText(context, weightData, Toast.LENGTH_SHORT).show();
+//                Log.e(TAG, "onClick: 确认weightData=" + weightData);
+//            }
+//        });
+
         dialog.show();
+    }
+
+    private void upTask(final String s) {
+        mTvHeight.setTextColor(Color.parseColor("#8B49F6"));
+        mTvWeight.setTextColor(Color.parseColor("#959595"));
+        mIvImg.setImageResource(R.drawable.step_band_modal_dialogue_01);
+        dialog.removeView(mView);
+        mView = heightAndWeightPickerView(s, 50, 240, "CM");
+        dialog.setView(mView);
+    }
+
+    private void downTask(final String s) {
+        mTvHeight.setTextColor(Color.parseColor("#959595"));
+        mTvWeight.setTextColor(Color.parseColor("#8B49F6"));
+        mIvImg.setImageResource(R.drawable.step_band_modal_dialogue_02);
+        dialog.removeView(mView);
+        mView = heightAndWeightPickerView(s, 10, 50, "KG");
+        dialog.setView(mView);
     }
 }

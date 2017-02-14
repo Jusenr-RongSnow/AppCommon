@@ -83,14 +83,23 @@
             android:visibility="visible"/>
 
         <Button
+            android:id="@+id/btn_next_step"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/btn_44_p_sel"
+            android:textColor="#fff"/>
+
+        <Button
             android:id="@+id/btn_complete"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/btn_44_p_sel"
-            android:text="完成"
-            android:textColor="#fff"/>
+            android:textColor="#fff"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
