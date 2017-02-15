@@ -67,7 +67,7 @@ public class WheelView extends View {
     /**
      * 额外的宽度
      */
-    private static final int ADDITIONAL_ITEMS_SPACE = 10;
+    private static final int ADDITIONAL_ITEMS_SPACE = 20;
 
     /**
      * 标签抵消

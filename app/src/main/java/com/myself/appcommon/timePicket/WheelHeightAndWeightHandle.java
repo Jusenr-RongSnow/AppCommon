@@ -108,17 +108,11 @@ public class WheelHeightAndWeightHandle {
 
         if (wv_integer.getVisibility() != View.GONE) {
             integer = String.valueOf(wv_integer.getCurrentItem() + START_INTEGER);
-            if (wv_integer.getCurrentItem() + 1 <= 9) {
-                integer = new StringBuffer(integer).toString();
-            }
             integer = new StringBuffer(integer + strInteger).toString();
         }
 
         if (wv_decimal.getVisibility() != View.GONE) {
             decimal = String.valueOf(wv_decimal.getCurrentItem());
-            if (wv_decimal.getCurrentItem() <= 9) {
-                decimal = new StringBuffer(decimal).toString();
-            }
             decimal = new StringBuffer(decimal + strDecimal).toString();
         }
 

@@ -69,7 +69,7 @@ public class TimePickerShow {
     }
 
 
-    public View stepPickerView(String dataStr, int startInteger, int endInteger, String company) {
+    public View stepPickerView(String dataStr, int startInteger, int endInteger) {
         View mView = View.inflate(context, R.layout.timepicker2, null);
         mStepHandle = new StepHandle(mView);
         mStepHandle.setSTART_INTEGER(startInteger);
@@ -78,9 +78,9 @@ public class TimePickerShow {
         // 若为空显示当前时间
         if (!TextUtils.isEmpty(dataStr) && !"null".equals(dataStr)) {
             int s0 = Integer.parseInt(dataStr);
-            mStepHandle.initStepPicker(s0, company);
+            mStepHandle.initStepPicker(s0);
         } else {
-            mStepHandle.initStepPicker(startInteger, company);
+            mStepHandle.initStepPicker(startInteger);
         }
 
         return mView;
@@ -179,7 +179,7 @@ public class TimePickerShow {
         String toString = textView.getText().toString().trim();
         Log.e(TAG, "toString=" + toString);
 
-        final String str = getRandom(10, 100, false);
+        final String str = getRandom(0, 30, false);
 
         View view = headView();
         TextView mTvSetting = (TextView) view.findViewById(R.id.tv_setting);
@@ -192,7 +192,7 @@ public class TimePickerShow {
         mIvPicture.setImageResource(R.drawable.img_band_modal_dialogue_60_02);
 
 //        mView = heightAndWeightPickerView(str, 50, 240, "CM");
-        mView = stepPickerView(str, 10, 100, "");
+        mView = stepPickerView(str, 0, 30);
 
         dialog.builder();
         dialog.setHeadView(view);

@@ -1,12 +1,8 @@
 package com.myself.appcommon.timePicket;
 
-import android.util.Log;
 import android.view.View;
 
 import com.myself.appcommon.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Description: 步数滚动选择器
@@ -23,7 +19,7 @@ public class StepHandle {
     private View view;
     private WheelView wv_step;
 
-    private int START_INTEGER = 0, END_INTEGER;
+    private int START_INTEGER = 1, END_INTEGER;
 
 
     public StepHandle(View view) {
@@ -43,25 +39,22 @@ public class StepHandle {
      * 初始化步数选择控件
      *
      * @param integer
-     * @param company
      */
-    public void initStepPicker(int integer, String company) {
+    public void initStepPicker(int integer) {
         // 添加数据并将其转换为list,方便之后的判断
-        List<Integer> list_integers = new ArrayList<>();
-
-        for (int i = 1; i <= 30; i++) {
-            list_integers.add(i);
-        }
-        Log.e(TAG, "initPicker: " + list_integers.toString());//1~30
-
+//        List<Integer> list_integers = new ArrayList<>();
+//        for (int i = 1; i <= 30; i++) {
+//            list_integers.add(i);
+//        }
+//        Log.e(TAG, "initPicker: " + list_integers.toString());//1~30
 
         wv_step = (WheelView) view.findViewById(R.id.wv_0);
 
         if (integer != -1) {
-            wv_step.setAdapter(new NumericWheelAdapter(START_INTEGER, END_INTEGER));
+            wv_step.setAdapter(new NumerStepWheelAdapter(START_INTEGER, END_INTEGER));
             wv_step.setCyclic(false);// 不可循环滚动
             int i = integer - START_INTEGER;
-            wv_step.setLabel(i == 6000 ? "(推荐)" : "");//单位
+            wv_step.setLabel("");//单位
             wv_step.setCurrentItem(i);// 初始化时显示的数据
         } else {
             wv_step.setVisibility(View.GONE);
@@ -80,9 +73,8 @@ public class StepHandle {
 
         if (wv_step.getVisibility() != View.GONE) {
             integer = String.valueOf(wv_step.getCurrentItem() + START_INTEGER);
-            if (wv_step.getCurrentItem() + 1 <= 9) {
-                integer = new StringBuffer(integer).toString();
-            }
+            int i = Integer.valueOf(integer) * 1000;
+            integer = String.valueOf(i);
             integer = new StringBuffer(integer + strInteger).toString();
         }
         sb.append(integer);
