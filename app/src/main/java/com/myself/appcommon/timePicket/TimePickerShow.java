@@ -204,9 +204,7 @@ public class TimePickerShow {
         dialog.setPositiveButton("完成", new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = getStepData("");
-//                String data = getHeightAndWeightData(".", "", "");
-                Log.e(TAG, "onClick: 完成weightData=" + data);
+                String data = getStepData("") + "步";
                 Toast.makeText(context, data, Toast.LENGTH_SHORT).show();
                 textView.setText(data);
             }

@@ -26,7 +26,7 @@ public class StepHandle {
         super();
         this.view = view;
         setView(view);
-//        initStepPicker(30, "");
+//        initStepPicker(30);
     }
 
     public StepHandle(View view, boolean hasSelect) {
