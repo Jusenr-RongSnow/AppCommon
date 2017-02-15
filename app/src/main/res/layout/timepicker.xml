@@ -10,44 +10,44 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/timePicker1"
+            android:id="@+id/timePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
             <!--year-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/year"
+                android:id="@+id/wv_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--month-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/month"
+                android:id="@+id/wv_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--day-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/day"
+                android:id="@+id/wv_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--hours-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/hour"
+                android:id="@+id/wv_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--mins-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/min"
+                android:id="@+id/wv_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--second-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/second"
+                android:id="@+id/wv_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>

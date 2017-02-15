@@ -17,19 +17,19 @@
             android:orientation="horizontal">
             <!--year-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/year"
+                android:id="@+id/wv_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--month-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/month"
+                android:id="@+id/wv_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <!--day-->
             <com.myself.appcommon.timePicket.WheelView
-                android:id="@+id/day"
+                android:id="@+id/wv_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>

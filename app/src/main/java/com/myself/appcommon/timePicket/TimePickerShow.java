@@ -27,8 +27,9 @@ public class TimePickerShow {
     public static final String TAG = TimePickerShow.class.getSimpleName();
 
     private Context context;
-    private WheelMain wheelMain;
+    private WheelTimeHandle mWheelTimeHandle;
     private WheelHeightAndWeightHandle mWheelHeightAndWeightHandle;
+    private StepHandle mStepHandle;
     private View mView;
 
     private IOSAlertDialog dialog;
@@ -63,22 +64,26 @@ public class TimePickerShow {
         return mHeightAndWeightPickerView;
     }
 
+    public String getStepData(String strInteger) {
+        return mStepHandle.getStepData(strInteger);
+    }
+
+
     public View stepPickerView(String dataStr, int startInteger, int endInteger, String company) {
-        View mHeightAndWeightPickerView = View.inflate(context, R.layout.timepicker1, null);
-        mWheelHeightAndWeightHandle = new WheelHeightAndWeightHandle(mHeightAndWeightPickerView);
-        mWheelHeightAndWeightHandle.setSTART_INTEGER(startInteger);
-        mWheelHeightAndWeightHandle.setEND_INTEGER(endInteger);
+        View mView = View.inflate(context, R.layout.timepicker2, null);
+        mStepHandle = new StepHandle(mView);
+        mStepHandle.setSTART_INTEGER(startInteger);
+        mStepHandle.setEND_INTEGER(endInteger);
+
         // 若为空显示当前时间
-        if (dataStr.contains(".") && !TextUtils.isEmpty(dataStr) && !"null".equals(dataStr)) {
-            String[] split = dataStr.split("\\.");
-            int s0 = Integer.parseInt(split[0]);
-            int s1 = Integer.parseInt(split[1].substring(0, 1));
-            mWheelHeightAndWeightHandle.initHeightAndWeightPicker(s0, s1, company);
+        if (!TextUtils.isEmpty(dataStr) && !"null".equals(dataStr)) {
+            int s0 = Integer.parseInt(dataStr);
+            mStepHandle.initStepPicker(s0, company);
         } else {
-            mWheelHeightAndWeightHandle.initHeightAndWeightPicker(startInteger, 0, company);
+            mStepHandle.initStepPicker(startInteger, company);
         }
 
-        return mHeightAndWeightPickerView;
+        return mView;
     }
 
 
@@ -94,12 +99,12 @@ public class TimePickerShow {
      * @return
      */
     public String getTxtTime(String strYear, String strMon, String strDay, String strHour, String strMins, String strSecond) {
-        return wheelMain.getTime(strYear, strMon, strDay, strHour, strMins, strSecond);
+        return mWheelTimeHandle.getTime(strYear, strMon, strDay, strHour, strMins, strSecond);
     }
 
     public View timePickerView() {
         View timepickerview = View.inflate(context, R.layout.timepicker, null);
-        wheelMain = new WheelMain(timepickerview);
+        mWheelTimeHandle = new WheelTimeHandle(timepickerview);
         // 获取当前时间
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -109,8 +114,8 @@ public class TimePickerShow {
         int min = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
 
-        wheelMain.setEND_YEAR(2030);// 设置最大年份
-        wheelMain.initDateTimePicker(year, month, day, hour, min, second);
+        mWheelTimeHandle.setEND_YEAR(2030);// 设置最大年份
+        mWheelTimeHandle.initDateTimePicker(year, month, day, hour, min, second);
 
         return timepickerview;
     }
@@ -123,7 +128,7 @@ public class TimePickerShow {
      */
     public View timePickerView(String dateStr) {
         View timepickerview = View.inflate(context, R.layout.timepicker, null);
-        wheelMain = new WheelMain(timepickerview);
+        mWheelTimeHandle = new WheelTimeHandle(timepickerview);
         // 获取当前时间
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -132,7 +137,7 @@ public class TimePickerShow {
         // int hour = calendar.get(Calendar.HOUR_OF_DAY);
         // int min = calendar.get(Calendar.MINUTE);
         // int second = calendar.get(Calendar.SECOND);
-        wheelMain.setEND_YEAR(2030);
+        mWheelTimeHandle.setEND_YEAR(2030);
         // 若为空显示当前时间
         if (dateStr.length() > 0 && !"null".equals(dateStr)) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,12 +147,12 @@ public class TimePickerShow {
                 year = calendar.get(Calendar.YEAR);
                 month = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
-                wheelMain.initDateTimePicker(year, month, day, -1, -1, -1);// 传-1表示不显示
+                mWheelTimeHandle.initDateTimePicker(year, month, day, -1, -1, -1);// 传-1表示不显示
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else {
-            wheelMain.initDateTimePicker(year, month, day, -1, -1, -1);
+            mWheelTimeHandle.initDateTimePicker(year, month, day, -1, -1, -1);
         }
         return timepickerview;
     }
@@ -174,7 +179,7 @@ public class TimePickerShow {
         String toString = textView.getText().toString().trim();
         Log.e(TAG, "toString=" + toString);
 
-        final String str = getRandom(1000, 30000, false);
+        final String str = getRandom(10, 100, false);
 
         View view = headView();
         TextView mTvSetting = (TextView) view.findViewById(R.id.tv_setting);
@@ -186,7 +191,8 @@ public class TimePickerShow {
         mTvDesc.setText("根据中国孩子日常所需运动量推荐");
         mIvPicture.setImageResource(R.drawable.img_band_modal_dialogue_60_02);
 
-        mView = heightAndWeightPickerView(str, 50, 240, "CM");
+//        mView = heightAndWeightPickerView(str, 50, 240, "CM");
+        mView = stepPickerView(str, 10, 100, "");
 
         dialog.builder();
         dialog.setHeadView(view);
@@ -195,14 +201,14 @@ public class TimePickerShow {
         /**
          * 完成
          */
-        dialog.setCompleteButton("完成", new OnClickListener() {
+        dialog.setPositiveButton("完成", new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = getHeightAndWeightData(".", "", "");
+                String data = getStepData("");
+//                String data = getHeightAndWeightData(".", "", "");
                 Log.e(TAG, "onClick: 完成weightData=" + data);
                 Toast.makeText(context, data, Toast.LENGTH_SHORT).show();
                 textView.setText(data);
-                Log.e(TAG, "onClick: " + data);
             }
         });
 
@@ -327,7 +333,7 @@ public class TimePickerShow {
     }
 
     private String getRandom(int min, int max, boolean isCombinedDecimal) {
-        int random = new Random().nextInt(max - min + 1) + min;
+        int random = new Random().nextInt(max - min) + min;
         String str0 = String.valueOf(random);
 
         int index = new Random().nextInt(10);

@@ -1,12 +1,15 @@
 package com.myself.appcommon.timePicket;
 
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.myself.appcommon.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Description: 身高、体重滚动选择器
+ * Description: 步数滚动选择器
  * Copyright  : Copyright (c) 2016
  * Email      : jusenr@163.com
  * Company    : 葡萄科技
@@ -15,11 +18,10 @@ import com.myself.appcommon.R;
  */
 
 public class StepHandle {
+    public static final String TAG = StepHandle.class.getSimpleName();
 
     private View view;
-    private WheelView wv_integer;
-    private WheelView wv_decimal;
-    private WheelView wv_company;
+    private WheelView wv_step;
 
     private int START_INTEGER = 0, END_INTEGER;
 
@@ -28,7 +30,7 @@ public class StepHandle {
         super();
         this.view = view;
         setView(view);
-//        initDateTimePicker();
+//        initStepPicker(30, "");
     }
 
     public StepHandle(View view, boolean hasSelect) {
@@ -38,98 +40,52 @@ public class StepHandle {
     }
 
     /**
-     * 初始化身高选择控件
+     * 初始化步数选择控件
      *
      * @param integer
-     * @param decimal
      * @param company
      */
-    public void initHeightAndWeightPicker(int integer, int decimal, String company) {
+    public void initStepPicker(int integer, String company) {
         // 添加数据并将其转换为list,方便之后的判断
-//        List<Integer> list_integers = new ArrayList<>();
-//        List<Integer> list_decimal = new ArrayList<>();
-//
-//        for (int i = START_INTEGER; i <= START_INTEGER; i++) {
-//            list_integers.add(i);
-//        }
-//        Log.e(TAG, "initPicker: " + list_integers.toString());//50~240
-//        for (int i = 0; i < 10; i++) {
-//            list_decimal.add(i);
-//        }
-//        Log.e(TAG, "initPicker: " + list_decimal.toString());//0~9
+        List<Integer> list_integers = new ArrayList<>();
 
-        wv_integer = (WheelView) view.findViewById(R.id.year);
-        wv_decimal = (WheelView) view.findViewById(R.id.month);
-        wv_company = (WheelView) view.findViewById(R.id.day);
+        for (int i = 1; i <= 30; i++) {
+            list_integers.add(i);
+        }
+        Log.e(TAG, "initPicker: " + list_integers.toString());//1~30
 
-        // 整数部分
+
+        wv_step = (WheelView) view.findViewById(R.id.wv_0);
+
         if (integer != -1) {
-            wv_integer.setAdapter(new NumericWheelAdapter(START_INTEGER, END_INTEGER));
-            wv_integer.setCyclic(false);// 不可循环滚动
-            wv_integer.setLabel(".");//单位
-            wv_integer.setCurrentItem(integer - START_INTEGER);// 初始化时显示的数据
+            wv_step.setAdapter(new NumericWheelAdapter(START_INTEGER, END_INTEGER));
+            wv_step.setCyclic(false);// 不可循环滚动
+            int i = integer - START_INTEGER;
+            wv_step.setLabel(i == 6000 ? "(推荐)" : "");//单位
+            wv_step.setCurrentItem(i);// 初始化时显示的数据
         } else {
-            wv_integer.setVisibility(View.GONE);
-        }
-
-        // 小数部分
-        if (decimal != -1) {
-            wv_decimal.setAdapter(new NumericWheelAdapter(0, 9));
-            wv_decimal.setCyclic(false);// 不可循环滚动
-            wv_decimal.setLabel("");//单位
-            wv_decimal.setCurrentItem(decimal);
-        } else {
-            wv_decimal.setVisibility(View.GONE);
-        }
-
-        // 单位
-        if (company != null) {
-            wv_company.setCyclic(false);// 不可循环滚动
-            wv_company.setLabel(company);
-//            wv_company.setCurrentItem(0);
-        } else {
-            wv_company.setVisibility(View.GONE);
+            wv_step.setVisibility(View.GONE);
         }
     }
 
     /**
-     * 获得选中身高
+     * 获得选中步数
      *
      * @param strInteger 间开符号1
-     * @param strDecimal 间开符号2
-     * @param strInteger 间开符号3
      * @returndecimal
      */
-    public String getHeightAndWeightData(String strInteger, String strDecimal, String strCompany) {
+    public String getStepData(String strInteger) {
         StringBuffer sb = new StringBuffer();
         String integer = "";
-        String decimal = "";
-        String company = "";
 
-        if (wv_integer.getVisibility() != View.GONE) {
-            integer = String.valueOf(wv_integer.getCurrentItem() + START_INTEGER);
-            if (wv_integer.getCurrentItem() + 1 <= 9) {
+        if (wv_step.getVisibility() != View.GONE) {
+            integer = String.valueOf(wv_step.getCurrentItem() + START_INTEGER);
+            if (wv_step.getCurrentItem() + 1 <= 9) {
                 integer = new StringBuffer(integer).toString();
             }
             integer = new StringBuffer(integer + strInteger).toString();
         }
-
-        if (wv_decimal.getVisibility() != View.GONE) {
-            decimal = String.valueOf(wv_decimal.getCurrentItem());
-            if (wv_decimal.getCurrentItem() <= 9) {
-                decimal = new StringBuffer(decimal).toString();
-            }
-            decimal = new StringBuffer(decimal + strDecimal).toString();
-        }
-
-        if (wv_company.getVisibility() != View.GONE) {
-//            company = String.valueOf(wv_company.getCurrentItem());
-//            Log.e(TAG, "getHeightData: company=" + company);
-            String label = wv_company.getLabel();
-            label = TextUtils.isEmpty(label) ? "" : label;
-            company = new StringBuffer(label + strCompany).toString();
-        }
-        sb.append(integer).append(decimal).append(company);
+        sb.append(integer);
 
         return sb.toString();
     }

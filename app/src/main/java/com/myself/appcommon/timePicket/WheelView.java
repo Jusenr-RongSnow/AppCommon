@@ -82,7 +82,22 @@ public class WheelView extends View {
     /**
      * 设置行数
      */
-    private static final int DEF_VISIBLE_ITEMS = 5;
+    private static final int DEF_VISIBLE_ITEMS = 7;
+
+    /**
+     * 设置items字体大小
+     */
+    private static int ITEMSPAINT_SIZE = 14;
+
+    /**
+     * 设置选中项字体大小
+     */
+    private static int VALUEPAINT_SIZE = 20;
+
+    /**
+     * 设置标签字体大小
+     */
+    private static int LABELPAINT_SIZE = 16;
 
     private Context context;
 
@@ -142,7 +157,7 @@ public class WheelView extends View {
 
         gestureDetector = new GestureDetector(context, gestureListener);
         gestureDetector.setIsLongpressEnabled(false);
-        ITEM_OFFSET = textSize(16) / 5;
+        ITEM_OFFSET = setTextSize(16) / 5;
         scroller = new Scroller(context);
 
     }
@@ -153,7 +168,7 @@ public class WheelView extends View {
      * @param size
      * @return
      */
-    public int textSize(int size) {
+    public int setTextSize(int size) {
         return sp2px(context, size);
     }
 
@@ -317,6 +332,37 @@ public class WheelView extends View {
     }
 
     /**
+     * 设置字体大小
+     *
+     * @param size
+     * @return
+     */
+    public void setItemsPaintSize(int size) {
+        ITEMSPAINT_SIZE = size;
+    }
+
+    /**
+     * 设置选中项字体大小
+     *
+     * @param size
+     * @rturn
+     */
+    public void setValuePaintSize(int size) {
+        VALUEPAINT_SIZE = size;
+    }
+
+    /**
+     * 设置标签字体大小
+     *
+     * @param size
+     * @return
+     */
+    public void setLabelPaintSize(int size) {
+        LABELPAINT_SIZE = size;
+    }
+
+
+    /**
      * 清空layouts
      */
     private void invalidateLayouts() {
@@ -332,20 +378,20 @@ public class WheelView extends View {
         if (itemsPaint == null) {
             itemsPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             itemsPaint.density = getResources().getDisplayMetrics().density;
-            itemsPaint.setTextSize(textSize(14));
+            itemsPaint.setTextSize(setTextSize(ITEMSPAINT_SIZE));
         }
 
         if (valuePaint == null) {
             valuePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
             valuePaint.density = getResources().getDisplayMetrics().density;
-            valuePaint.setTextSize(textSize(16));
+            valuePaint.setTextSize(setTextSize(VALUEPAINT_SIZE));
             valuePaint.setShadowLayer(0.1f, 0, 0.1f, 0xFFC0C0C0);
         }
         if (labelPaint == null) {
             labelPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
             labelPaint.density = getResources().getDisplayMetrics().density;
             labelPaint.setColor(VALUE_TEXT_COLOR);
-            labelPaint.setTextSize(textSize(18));
+            labelPaint.setTextSize(setTextSize(LABELPAINT_SIZE));
         }
 
         if (centerDrawable == null) {

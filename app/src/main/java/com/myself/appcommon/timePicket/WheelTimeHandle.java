@@ -7,7 +7,7 @@ import com.myself.appcommon.R;
 import java.util.Arrays;
 import java.util.List;
 
-public class WheelMain {
+public class WheelTimeHandle {
 
     private View view;
     private WheelView wv_year;
@@ -42,13 +42,13 @@ public class WheelMain {
         END_YEAR = eND_YEAR;
     }
 
-    public WheelMain(View view) {
+    public WheelTimeHandle(View view) {
         super();
         this.view = view;
         setView(view);
     }
 
-    public WheelMain(View view, boolean hasSelectTime) {
+    public WheelTimeHandle(View view, boolean hasSelectTime) {
         super();
         this.view = view;
         setView(view);
@@ -75,12 +75,12 @@ public class WheelMain {
         final List<String> list_big = Arrays.asList(months_big);
         final List<String> list_little = Arrays.asList(months_little);
 
-        wv_year = (WheelView) view.findViewById(R.id.year);
-        wv_month = (WheelView) view.findViewById(R.id.month);
-        wv_day = (WheelView) view.findViewById(R.id.day);
-        wv_hours = (WheelView) view.findViewById(R.id.hour);
-        wv_mins = (WheelView) view.findViewById(R.id.min);
-        wv_second = (WheelView) view.findViewById(R.id.second);
+        wv_year = (WheelView) view.findViewById(R.id.wv_0);
+        wv_month = (WheelView) view.findViewById(R.id.wv_1);
+        wv_day = (WheelView) view.findViewById(R.id.wv_2);
+        wv_hours = (WheelView) view.findViewById(R.id.wv_3);
+        wv_mins = (WheelView) view.findViewById(R.id.wv_4);
+        wv_second = (WheelView) view.findViewById(R.id.wv_5);
 
         // 年
         if (year != -1) {

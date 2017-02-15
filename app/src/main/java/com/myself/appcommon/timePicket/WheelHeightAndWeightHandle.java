@@ -58,9 +58,9 @@ public class WheelHeightAndWeightHandle {
 //        }
 //        Log.e(TAG, "initPicker: " + list_decimal.toString());//0~9
 
-        wv_integer = (WheelView) view.findViewById(R.id.year);
-        wv_decimal = (WheelView) view.findViewById(R.id.month);
-        wv_company = (WheelView) view.findViewById(R.id.day);
+        wv_integer = (WheelView) view.findViewById(R.id.wv_0);
+        wv_decimal = (WheelView) view.findViewById(R.id.wv_1);
+        wv_company = (WheelView) view.findViewById(R.id.wv_2);
 
         // 整数部分
         if (integer != -1) {
