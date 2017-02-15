@@ -16,6 +16,7 @@ import com.myself.appcommon.alertdialog.IOSAlertDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -155,13 +156,9 @@ public class TimePickerShow {
         String toString = textView.getText().toString().trim();
         Log.e(TAG, "toString=" + toString);
 
-        int random0 = new Random().nextInt(191) + 50;
-        int random1 = new Random().nextInt(41) + 10;
-        int random2 = new Random().nextInt(10);
-        final String str0 = String.valueOf(random0) + "." + String.valueOf(random2);
-        final String str1 = String.valueOf(random1) + "." + String.valueOf(random2);
-        Log.e(TAG, "str0=" + str0);
-        Log.e(TAG, "str1=" + str1);
+        String[] strings = getRandom();
+        final String str0 = strings[0];
+        final String str1 = strings[1];
 
         View view = headView();
         mTvHeight = (TextView) view.findViewById(R.id.tv_height);
@@ -173,18 +170,18 @@ public class TimePickerShow {
             @Override
             public void onClick(View v) {
                 upTask(str0);
+//                dialog.setLayout(true);
             }
         });
         mTvWeight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 downTask(str1);
+//                dialog.setLayout(false);
             }
         });
 
         dialog.builder();
-//        dialog.setTitle("选择日期");
-//        dialog.setButtonStyle(0);
         dialog.setHeadView(view);
         dialog.setView(mView);
 
@@ -263,5 +260,21 @@ public class TimePickerShow {
         dialog.removeView(mView);
         mView = heightAndWeightPickerView(s, 10, 50, "KG");
         dialog.setView(mView);
+    }
+
+    private String[] getRandom() {
+        int random0 = new Random().nextInt(191) + 50;
+        int random1 = new Random().nextInt(41) + 10;
+        int random2 = new Random().nextInt(10);
+        final String str0 = String.valueOf(random0) + "." + String.valueOf(random2);
+        final String str1 = String.valueOf(random1) + "." + String.valueOf(random2);
+        Log.e(TAG, "str0=" + str0);
+        Log.e(TAG, "str1=" + str1);
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add(0, str0);
+
+        String[] strings = {str0, str1};
+
+        return strings;
     }
 }

@@ -84,13 +84,13 @@ public class IOSAlertDialog {
 
         btn_neg = (Button) view.findViewById(R.id.btn_neg);
         btn_neg.setVisibility(View.GONE);
-        btn_next_step = (Button) view.findViewById(R.id.btn_next_step);
-        btn_next_step.setVisibility(View.GONE);
         btn_pos = (Button) view.findViewById(R.id.btn_pos);
         btn_pos.setVisibility(View.GONE);
 
         btn_previous_step = (Button) view.findViewById(R.id.btn_previous_step);
         btn_previous_step.setVisibility(View.GONE);
+        btn_next_step = (Button) view.findViewById(R.id.btn_next_step);
+        btn_next_step.setVisibility(View.GONE);
         btn_complete = (Button) view.findViewById(R.id.btn_complete);
         btn_complete.setVisibility(View.GONE);
 
@@ -110,8 +110,7 @@ public class IOSAlertDialog {
     public IOSAlertDialog setTitle(String title) {
         showTitle = true;
         if ("".equals(title)) {
-//            txt_title.setText("标题");
-            txt_title.setText("");
+            txt_title.setText("标题");
         } else {
             txt_title.setText(title);
         }
@@ -135,8 +134,7 @@ public class IOSAlertDialog {
     public IOSAlertDialog setMsg(String msg) {
         showMsg = true;
         if ("".equals(msg)) {
-//            txt_msg.setText("内容");
-            txt_msg.setText("");
+            txt_msg.setText("内容");
         } else {
             txt_msg.setText(msg);
         }
@@ -175,6 +173,13 @@ public class IOSAlertDialog {
         return this;
     }
 
+    /**
+     * PreviousStep
+     *
+     * @param text
+     * @param listener
+     * @return
+     */
     public IOSAlertDialog setPreviousStepButton(String text, final OnClickListener listener) {
         showButtonStyle = true;
         if (!TextUtils.isEmpty(text)) {
@@ -289,7 +294,7 @@ public class IOSAlertDialog {
         return this;
     }
 
-    private void setLayout(boolean b) {
+    public void setLayout(boolean b) {
         if (!showTitle && !showMsg) {
             txt_title.setText("");
             txt_title.setVisibility(View.VISIBLE);

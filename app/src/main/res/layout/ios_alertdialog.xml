@@ -133,10 +133,10 @@
             android:layout_width="wrap_content"
             android:layout_height="43dp"
             android:layout_weight="1"
-            android:background="@drawable/dialog_right_btn_select"
+            android:background="@drawable/btn_44_p_sel"
             android:gravity="center"
             android:text="确认"
-            android:textColor="#000000"
+            android:textColor="#fff"
             android:textSize="14sp"/>
     </LinearLayout>
 
