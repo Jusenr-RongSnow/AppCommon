@@ -11,6 +11,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/iv_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/img_band_modal_dialogue_60_01"/>
@@ -22,7 +23,7 @@
             android:layout_marginRight="10dp">
 
             <TextView
-                android:id="@+id/tv_child_info_setting"
+                android:id="@+id/tv_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -32,21 +33,22 @@
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/tv_child_info_desc"
+                android:id="@+id/tv_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/tv_child_info_setting"
+                android:layout_below="@id/tv_setting"
                 android:padding="8dp"
                 android:text="完善孩子资料让信息推送更精准"
                 android:textColor="#959595"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
         </RelativeLayout>
 
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F5F5F5"

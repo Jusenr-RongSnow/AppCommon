@@ -25,44 +25,83 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/get_time"
+            android:id="@+id/btn_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="获取选中时间"/>
 
         <TextView
-            android:id="@+id/txt_date1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/alertdialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="alertdialog弹窗"/>
-
-        <TextView
-            android:id="@+id/txt_date2"
+            android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textSize="15sp"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="test"
-        android:textAllCaps="false"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="alertdialog弹窗"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/tv_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_dialog2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="alertdialog弹窗2"
+            android:textAllCaps="false"/>
+
+
+        <TextView
+            android:id="@+id/tv_dialog2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

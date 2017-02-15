@@ -14,7 +14,7 @@ import com.myself.appcommon.R;
  * Date       : 2017/2/10 18:47.
  */
 
-public class WheelHeightAndWeightView {
+public class WheelHeightAndWeightHandle {
 
     private View view;
     private WheelView wv_integer;
@@ -24,14 +24,14 @@ public class WheelHeightAndWeightView {
     private int START_INTEGER = 0, END_INTEGER;
 
 
-    public WheelHeightAndWeightView(View view) {
+    public WheelHeightAndWeightHandle(View view) {
         super();
         this.view = view;
         setView(view);
 //        initDateTimePicker();
     }
 
-    public WheelHeightAndWeightView(View view, boolean hasSelect) {
+    public WheelHeightAndWeightHandle(View view, boolean hasSelect) {
         super();
         this.view = view;
         setView(view);

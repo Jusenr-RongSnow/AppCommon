@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,6 @@ import com.myself.appcommon.alertdialog.IOSAlertDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -28,7 +28,7 @@ public class TimePickerShow {
 
     private Context context;
     private WheelMain wheelMain;
-    private WheelHeightAndWeightView mWheelHeightAndWeightView;
+    private WheelHeightAndWeightHandle mWheelHeightAndWeightHandle;
     private View mView;
 
     private IOSAlertDialog dialog;
@@ -42,26 +42,45 @@ public class TimePickerShow {
     }
 
     public String getHeightAndWeightData(String strInteger, String strDecimal, String strCompany) {
-        return mWheelHeightAndWeightView.getHeightAndWeightData(strInteger, strDecimal, strCompany);
+        return mWheelHeightAndWeightHandle.getHeightAndWeightData(strInteger, strDecimal, strCompany);
     }
 
     public View heightAndWeightPickerView(String dataStr, int startInteger, int endInteger, String company) {
         View mHeightAndWeightPickerView = View.inflate(context, R.layout.timepicker1, null);
-        mWheelHeightAndWeightView = new WheelHeightAndWeightView(mHeightAndWeightPickerView);
-        mWheelHeightAndWeightView.setSTART_INTEGER(startInteger);
-        mWheelHeightAndWeightView.setEND_INTEGER(endInteger);
+        mWheelHeightAndWeightHandle = new WheelHeightAndWeightHandle(mHeightAndWeightPickerView);
+        mWheelHeightAndWeightHandle.setSTART_INTEGER(startInteger);
+        mWheelHeightAndWeightHandle.setEND_INTEGER(endInteger);
         // 若为空显示当前时间
         if (dataStr.contains(".") && !TextUtils.isEmpty(dataStr) && !"null".equals(dataStr)) {
             String[] split = dataStr.split("\\.");
             int s0 = Integer.parseInt(split[0]);
             int s1 = Integer.parseInt(split[1].substring(0, 1));
-            mWheelHeightAndWeightView.initHeightAndWeightPicker(s0, s1, company);
+            mWheelHeightAndWeightHandle.initHeightAndWeightPicker(s0, s1, company);
         } else {
-            mWheelHeightAndWeightView.initHeightAndWeightPicker(startInteger, 0, company);
+            mWheelHeightAndWeightHandle.initHeightAndWeightPicker(startInteger, 0, company);
         }
 
         return mHeightAndWeightPickerView;
     }
+
+    public View stepPickerView(String dataStr, int startInteger, int endInteger, String company) {
+        View mHeightAndWeightPickerView = View.inflate(context, R.layout.timepicker1, null);
+        mWheelHeightAndWeightHandle = new WheelHeightAndWeightHandle(mHeightAndWeightPickerView);
+        mWheelHeightAndWeightHandle.setSTART_INTEGER(startInteger);
+        mWheelHeightAndWeightHandle.setEND_INTEGER(endInteger);
+        // 若为空显示当前时间
+        if (dataStr.contains(".") && !TextUtils.isEmpty(dataStr) && !"null".equals(dataStr)) {
+            String[] split = dataStr.split("\\.");
+            int s0 = Integer.parseInt(split[0]);
+            int s1 = Integer.parseInt(split[1].substring(0, 1));
+            mWheelHeightAndWeightHandle.initHeightAndWeightPicker(s0, s1, company);
+        } else {
+            mWheelHeightAndWeightHandle.initHeightAndWeightPicker(startInteger, 0, company);
+        }
+
+        return mHeightAndWeightPickerView;
+    }
+
 
     /**
      * 获得选中的时间
@@ -145,7 +164,53 @@ public class TimePickerShow {
     }
 
     /**
-     * alertDialog时间选择
+     * alertDialog
+     *
+     * @param textView
+     */
+    public void numberPickerAlertDialog(final TextView textView) {
+        if (dialog == null)
+            dialog = new IOSAlertDialog(context);
+        String toString = textView.getText().toString().trim();
+        Log.e(TAG, "toString=" + toString);
+
+        final String str = getRandom(1000, 30000, false);
+
+        View view = headView();
+        TextView mTvSetting = (TextView) view.findViewById(R.id.tv_setting);
+        TextView mTvDesc = (TextView) view.findViewById(R.id.tv_desc);
+        ImageView mIvPicture = (ImageView) view.findViewById(R.id.iv_picture);
+        RelativeLayout mRlOther = (RelativeLayout) view.findViewById(R.id.rl_other);
+        mRlOther.setVisibility(View.GONE);
+        mTvSetting.setText("运动目标设置");
+        mTvDesc.setText("根据中国孩子日常所需运动量推荐");
+        mIvPicture.setImageResource(R.drawable.img_band_modal_dialogue_60_02);
+
+        mView = heightAndWeightPickerView(str, 50, 240, "CM");
+
+        dialog.builder();
+        dialog.setHeadView(view);
+        dialog.setView(mView);
+
+        /**
+         * 完成
+         */
+        dialog.setCompleteButton("完成", new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String data = getHeightAndWeightData(".", "", "");
+                Log.e(TAG, "onClick: 完成weightData=" + data);
+                Toast.makeText(context, data, Toast.LENGTH_SHORT).show();
+                textView.setText(data);
+                Log.e(TAG, "onClick: " + data);
+            }
+        });
+
+        dialog.show();
+    }
+
+    /**
+     * alertDialog
      *
      * @param textView
      */
@@ -156,9 +221,8 @@ public class TimePickerShow {
         String toString = textView.getText().toString().trim();
         Log.e(TAG, "toString=" + toString);
 
-        String[] strings = getRandom();
-        final String str0 = strings[0];
-        final String str1 = strings[1];
+        final String str0 = getRandom(50, 240, true);
+        final String str1 = getRandom(10, 50, true);
 
         View view = headView();
         mTvHeight = (TextView) view.findViewById(R.id.tv_height);
@@ -262,19 +326,16 @@ public class TimePickerShow {
         dialog.setView(mView);
     }
 
-    private String[] getRandom() {
-        int random0 = new Random().nextInt(191) + 50;
-        int random1 = new Random().nextInt(41) + 10;
-        int random2 = new Random().nextInt(10);
-        final String str0 = String.valueOf(random0) + "." + String.valueOf(random2);
-        final String str1 = String.valueOf(random1) + "." + String.valueOf(random2);
-        Log.e(TAG, "str0=" + str0);
-        Log.e(TAG, "str1=" + str1);
-        ArrayList<String> objects = new ArrayList<>();
-        objects.add(0, str0);
+    private String getRandom(int min, int max, boolean isCombinedDecimal) {
+        int random = new Random().nextInt(max - min + 1) + min;
+        String str0 = String.valueOf(random);
 
-        String[] strings = {str0, str1};
+        int index = new Random().nextInt(10);
+        String str1 = str0 + "." + String.valueOf(index);
 
-        return strings;
+        Log.e("getRandom-->", "str0=" + str0);
+        Log.e("getRandom-->", "str1=" + str1);
+
+        return isCombinedDecimal ? str1 : str0;
     }
 }

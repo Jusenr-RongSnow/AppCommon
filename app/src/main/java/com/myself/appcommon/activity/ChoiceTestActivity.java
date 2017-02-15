@@ -1,5 +1,6 @@
 package com.myself.appcommon.activity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -8,19 +9,24 @@ import android.widget.TextView;
 import com.myself.appcommon.R;
 import com.myself.appcommon.base.BaseActivity;
 import com.myself.appcommon.timePicket.TimePickerShow;
-import com.myself.appcommon.timePicket.WheelHeightAndWeightView;
+import com.myself.appcommon.timePicket.WheelHeightAndWeightHandle;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-public class ChoiceTestActivity extends BaseActivity implements View.OnClickListener {
+public class ChoiceTestActivity extends BaseActivity {
+    public static final String TAG = ChoiceTestActivity.class.getSimpleName();
 
-    private LinearLayout linearLayout;
-    private TextView dateText1;
-    private TextView dateText2;
-    private Button getTime;
-    private Button alertDialogBtn;
-    private Button test;
-    private TimePickerShow timePickerShow;
+    private LinearLayout mLinearLayout;
+    private TimePickerShow mTimePickerShow;
+    private TextView mTvTime;
+    private TextView mTvDialog;
+    private TextView mTvDialog2;
+    private TextView mTvTest;
+    private Button mBtnTime;
+    private Button mBtnDialog;
+    private Button mBtnDialog2;
+    private Button mBtnTest;
 
 
     @Override
@@ -35,75 +41,80 @@ public class ChoiceTestActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initStaticData() {
-        timePickerShow = new TimePickerShow(this);
+        mTimePickerShow = new TimePickerShow(this);
     }
 
     @Override
     public void initData() {
-        linearLayout.addView(timePickerShow.timePickerView());
+        mLinearLayout.addView(mTimePickerShow.timePickerView());
     }
 
     @Override
     public void initView() {
-        linearLayout = (LinearLayout) findViewById(R.id.date_view);
-        dateText1 = (TextView) findViewById(R.id.txt_date1);
-        dateText2 = (TextView) findViewById(R.id.txt_date2);
-        getTime = (Button) findViewById(R.id.get_time);
-        alertDialogBtn = (Button) findViewById(R.id.alertdialog);
-        test = (Button) findViewById(R.id.test);
+        mLinearLayout = (LinearLayout) findViewById(R.id.date_view);
+
+        mBtnTime = (Button) findViewById(R.id.btn_time);
+        mTvTime = (TextView) findViewById(R.id.tv_time);
+
+        mBtnDialog = (Button) findViewById(R.id.btn_dialog);
+        mTvDialog = (TextView) findViewById(R.id.tv_dialog);
+
+        mBtnTest = (Button) findViewById(R.id.btn_test);
+        mTvTest = (TextView) findViewById(R.id.tv_test);
+
+        mBtnDialog2 = (Button) findViewById(R.id.btn_dialog2);
+        mTvDialog2 = (TextView) findViewById(R.id.tv_dialog2);
+
     }
 
     @Override
     public void initListener() {
         final TextView view = new TextView(this);
 
-        getTime.setOnClickListener(new View.OnClickListener() {
+        mBtnTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dateText1.setText(timePickerShow.getTxtTime("-", "-", " ", ":", ":", ""));
+                mTvTime.setText(mTimePickerShow.getTxtTime("-", "-", " ", ":", ":", ""));
             }
         });
-        alertDialogBtn.setOnClickListener(new View.OnClickListener() {
+
+        mBtnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePickerShow.timePickerAlertDialog(dateText2);
+                new WheelHeightAndWeightHandle(view);
+                String[] random = getRandom();
+                mTvTest.setText(random[0]);
             }
         });
-        test.setOnClickListener(new View.OnClickListener() {
+
+        mBtnDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new WheelHeightAndWeightView(view);
-                getRandom();
+                mTimePickerShow.timePickerAlertDialog(mTvDialog);
+            }
+        });
+
+        mBtnDialog2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTimePickerShow.numberPickerAlertDialog(mTvDialog2);
             }
         });
     }
 
+    private String[] getRandom() {
+        int random0 = new Random().nextInt(191) + 50;
+        int random1 = new Random().nextInt(41) + 10;
+        int random2 = new Random().nextInt(10);
+        final String str0 = String.valueOf(random0) + "." + String.valueOf(random2);
+        final String str1 = String.valueOf(random1) + "." + String.valueOf(random2);
+        Log.e(TAG, "str0=" + str0);
+        Log.e(TAG, "str1=" + str1);
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add(0, str0);
 
-    private void getRandom() {
-        double random0 = Math.random() * 100;
-        double random1 = Math.random() * 10;
-        final String str0 = String.valueOf(random0).split("\\.")[0];
-        final String str1 = String.valueOf(random1).split("\\.")[0];
-        final String str = str0 + "." + str1;
-        System.out.println(str0);
-        System.out.println(str1);
-        int nextInt = new Random().nextInt(51);
-        System.out.println(nextInt);
-        final int parseInt = Integer.parseInt(str0);
-        if (parseInt > 49)
-            dateText2.setText(str);
-    }
+        String[] strings = {str0, str1};
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.get_time:
-
-                break;
-
-            case R.id.alertdialog:
-
-                break;
-        }
+        return strings;
     }
 }
