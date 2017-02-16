@@ -18,7 +18,7 @@ import com.dsw.calendar.theme.IWeekTheme;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/8/7.
+ * Created by Jusenr on 2017/2/16.
  */
 public class SquareCalendarView extends LinearLayout implements View.OnClickListener {
     private WeekView weekView;
@@ -30,15 +30,15 @@ public class SquareCalendarView extends LinearLayout implements View.OnClickList
         setOrientation(LinearLayout.VERTICAL);
         LayoutParams llParams =
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        View view = LayoutInflater.from(context).inflate(R.layout.display_grid_date, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.popup_display_grid_date, null);
         weekView = new WeekView(context, null);
         squareMonthView = new SquareMonthView(context, null);
         addView(view, llParams);
         addView(weekView, llParams);
         addView(squareMonthView, llParams);
 
-        view.findViewById(R.id.left).setOnClickListener(this);
-        view.findViewById(R.id.right).setOnClickListener(this);
+        view.findViewById(R.id.ll_left).setOnClickListener(this);
+        view.findViewById(R.id.ll_right).setOnClickListener(this);
         textViewYear = (TextView) view.findViewById(R.id.year);
         textViewMonth = (TextView) view.findViewById(R.id.month);
         squareMonthView.setMonthLisener(new MonthView.IMonthLisener() {
@@ -62,7 +62,7 @@ public class SquareCalendarView extends LinearLayout implements View.OnClickList
     /**
      * 设置星期的形式
      *
-     * @param weekString 默认值	"日","一","二","三","四","五","六"
+     * @param weekString 默认值形式	"日","一","二","三","四","五","六"
      */
     public void setWeekString(String[] weekString) {
         weekView.setWeekString(weekString);

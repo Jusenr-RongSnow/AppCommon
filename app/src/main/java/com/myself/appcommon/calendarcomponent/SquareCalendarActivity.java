@@ -24,9 +24,9 @@ public class SquareCalendarActivity extends Activity {
         int currYear = calendar.get(Calendar.YEAR);
         int currMonth = calendar.get(Calendar.MONTH) + 1;
         List<CalendarInfo> list = new ArrayList<CalendarInfo>();
-        list.add(new CalendarInfo(currYear, currMonth, 6, "￥800"));
-        list.add(new CalendarInfo(currYear, currMonth, 7, "￥1000", 2));
-        list.add(new CalendarInfo(currYear, currMonth, 8, "￥1200", 1));
+//        list.add(new CalendarInfo(currYear, currMonth, 6, "￥800"));
+//        list.add(new CalendarInfo(currYear, currMonth, 7, "￥1000", 2));
+//        list.add(new CalendarInfo(currYear, currMonth, 8, "￥1200", 1));
         squareMonthView = (SquareCalendarView) findViewById(R.id.squareMonthView);
         squareMonthView.setCalendarInfos(list);
         squareMonthView.setDateClick(new MonthView.IDateClick() {

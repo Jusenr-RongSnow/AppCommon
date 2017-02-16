@@ -8,17 +8,17 @@ import android.graphics.Color;
 public class DefaultDayTheme implements IDayTheme {
     @Override
     public int colorSelectBG() {
-        return Color.parseColor("#13A4D3");
+        return Color.parseColor("#F3ECFE");
     }
 
     @Override
     public int colorSelectDay() {
-        return Color.parseColor("#FFFFFF");
+        return Color.parseColor("#8B49F6");
     }
 
     @Override
     public int colorToday() {
-        return Color.parseColor("#68CB00");
+        return Color.parseColor("#8B49F6");
     }
 
     @Override

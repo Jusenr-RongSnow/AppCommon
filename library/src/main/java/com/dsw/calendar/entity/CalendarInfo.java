@@ -27,6 +27,7 @@ public class CalendarInfo {
 
     /**
      * 构造函数
+     *
      * @param year  事务年份
      * @param month 事务月份
      * @param day   事务日期号
@@ -41,6 +42,7 @@ public class CalendarInfo {
 
     /**
      * 构造函数
+     *
      * @param year  事务年份
      * @param month 事务月份
      * @param day   事务日期号
