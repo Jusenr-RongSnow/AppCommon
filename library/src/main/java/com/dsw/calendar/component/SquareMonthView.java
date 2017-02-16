@@ -146,6 +146,11 @@ public class SquareMonthView extends MonthView {
             //正常月，选中其他日期，则今日为红色
             paint.setColor(theme.colorToday());
             canvas.drawText(day + "", startX, startY, paint);
+            //下划线标记
+            paint.setTextSize(sp2px(context, theme.sizeDay()));
+            int priceX = (int) (columnSize * column + (columnSize - paint.measureText(des)) / 2) - 5;
+            int priceY = (int) (startY + 15);
+            canvas.drawText("_", priceX, priceY, paint);
         } else {
             if (!TextUtils.isEmpty(des)) {//没选中，但是desc不为空
                 int dateY = (int) (startY - 10);

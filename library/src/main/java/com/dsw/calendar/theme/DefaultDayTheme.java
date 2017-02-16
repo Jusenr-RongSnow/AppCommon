@@ -63,7 +63,7 @@ public class DefaultDayTheme implements IDayTheme {
 
     @Override
     public int sizeDecor() {
-        return 6;
+        return 4;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class DefaultDayTheme implements IDayTheme {
 
     @Override
     public int dateHeight() {
-        return 70;
+        return 36;
     }
 
     @Override

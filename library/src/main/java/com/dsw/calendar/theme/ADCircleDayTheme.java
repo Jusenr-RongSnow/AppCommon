@@ -63,7 +63,7 @@ public class ADCircleDayTheme implements IDayTheme {
 
     @Override
     public int sizeDesc() {
-        return 14;
+        return 4;
     }
 
     @Override
