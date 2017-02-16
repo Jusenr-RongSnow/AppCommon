@@ -8,23 +8,24 @@ import android.graphics.Color;
 public class SquareDayTheme implements IDayTheme {
     @Override
     public int colorSelectBG() {
-        return Color.parseColor("#38C0C3");
+        return Color.parseColor("#F3ECFE");
     }
 
     @Override
     public int colorSelectDay() {
-        return Color.parseColor("#FFFFFF");
+        return Color.parseColor("#8B49F6");
     }
 
     @Override
     public int colorToday() {
-        return Color.parseColor("#68CB00");
+        return Color.parseColor("#8B49F6");
     }
 
     @Override
     public int colorMonthView() {
         return Color.parseColor("#FFFFFF");
     }
+
 
     @Override
     public int colorWeekday() {
@@ -58,12 +59,12 @@ public class SquareDayTheme implements IDayTheme {
 
     @Override
     public int sizeDay() {
-        return 30;
+        return 16;
     }
 
     @Override
     public int sizeDesc() {
-        return 14;
+        return 4;
     }
 
     @Override

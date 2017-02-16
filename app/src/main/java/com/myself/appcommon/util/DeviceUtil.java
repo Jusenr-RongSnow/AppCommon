@@ -277,7 +277,7 @@ public class DeviceUtil {
     /**
      * 获得MetaData
      *
-     * @param name
+     * @param context
      * @return
      */
     public static String getMetaDataValue(Context context, String key,

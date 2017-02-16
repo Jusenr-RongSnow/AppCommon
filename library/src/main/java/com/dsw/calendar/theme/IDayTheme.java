@@ -75,21 +75,21 @@ public interface IDayTheme {
     public int colorDesc();
 
     /**
-     * 日期大小
+     * 日期大小 sp
      *
      * @return
      */
     public int sizeDay();
 
     /**
-     * 描述文字大小
+     * 描述文字大小 sp
      *
      * @return
      */
     public int sizeDesc();
 
     /**
-     * 装饰器大小
+     * 装饰器大小 sp
      *
      * @return
      */

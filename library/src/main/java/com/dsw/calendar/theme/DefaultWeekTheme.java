@@ -38,6 +38,6 @@ public class DefaultWeekTheme implements IWeekTheme {
 
     @Override
     public int sizeText() {
-        return 14;
+        return 16;
     }
 }

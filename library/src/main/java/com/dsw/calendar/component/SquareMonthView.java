@@ -15,44 +15,60 @@ import com.dsw.calendar.theme.SquareDayTheme;
  */
 public class SquareMonthView extends MonthView {
 
+    private Context context;
+
     public SquareMonthView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
+    /**
+     * 绘制间隔线
+     *
+     * @param canvas
+     * @param rowsCount
+     */
     @Override
     protected void drawLines(Canvas canvas, int rowsCount) {
-        int rightX = getWidth();
-        Path path;
-        float startX = 0;
-        float endX = rightX;
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(theme.colorLine());
-        for (int row = 1; row <= rowsCount; row++) {
-            float startY = row * rowSize;
-            path = new Path();
-            path.moveTo(startX, startY);
-            path.lineTo(endX, startY);
-            canvas.drawPath(path, paint);
-        }
+//        int rightX = getWidth();
+//        int BottomY = getHeight();
+//        int rowCount = rowsCount;
+//        int columnCount = 7;
+//        Path path;
+//        float startX = 0;
+//        float endX = rightX;
+//        paint.setStyle(Paint.Style.STROKE);
+//        paint.setColor(theme.colorLine());
+//        for (int row = 1; row <= rowCount; row++) {
+//            float startY = row * rowSize;
+//            path = new Path();
+//            path.moveTo(startX, startY);
+//            path.lineTo(endX, startY);
+//            canvas.drawPath(path, paint);
+//        }
+//
+//        float startY = 0;
+//        float endY = BottomY;
+//        for (int column = 1; column < columnCount; column++) {
+//            startX = column * columnSize;
+//            path = new Path();
+//            path.moveTo(startX, startY);
+//            path.lineTo(startX, endY);
+//            canvas.drawPath(path, paint);
+//        }
     }
 
     @Override
     protected void drawBG(Canvas canvas, int column, int row, int day) {
-        float startRecX = columnSize * column + 1;
-        float startRecY = rowSize * row + 1;
-        float endRecX = startRecX + columnSize - 2 * 1;
-        float endRecY = startRecY + rowSize - 2 * 1;
-        float cx = (startRecX + endRecX) / 2;
-        float cy = (startRecY + endRecY) / 2;
-        float radius = columnSize < (rowSize * 0.6) ? columnSize / 2 : (float) (rowSize * 0.6) / 2;
-        paint.setColor(theme.colorSelectBG());
-        if (day == selDay) { //绘制背景色圆形
+        if (day == selDay) {
+            //绘制背景色矩形
+            float startRecX = columnSize * column + 1;
+            float startRecY = rowSize * row + 1;
+            float endRecX = startRecX + columnSize - 2 * 1;
+            float endRecY = startRecY + rowSize - 2 * 1;
+            paint.setColor(theme.colorSelectBG());
             paint.setStyle(Paint.Style.FILL);
-            canvas.drawCircle(cx, cy, radius, paint);
-        }
-        if (day == currDay && currDay != selDay && currMonth == selMonth) {//今日绘制圆环
-            paint.setStyle(Paint.Style.STROKE);
-            canvas.drawCircle(cx, cy, radius, paint);
+            canvas.drawRect(startRecX, startRecY, endRecX, endRecY, paint);
         }
     }
 
@@ -62,36 +78,43 @@ public class SquareMonthView extends MonthView {
             if (TextUtils.isEmpty(iscalendarInfo(year, month, day))) return;
             paint.setColor(theme.colorDecor());
             paint.setStyle(Paint.Style.FILL);
-            float circleX = (float) (columnSize * column + columnSize * 0.5);
-            float circleY = (float) (rowSize * row + rowSize * 0.25);
-            if (day == selDay) {//选中日期无事务
-                circleY = (float) (rowSize * row + rowSize * 0.1);
-            }
-            canvas.drawCircle(circleX, circleY, theme.sizeDecor(), paint);
+            float circleX = (float) (columnSize * column + columnSize * 0.8);
+            float circleY = (float) (rowSize * row + rowSize * 0.2);
+            canvas.drawCircle(circleX, circleY, sp2px(context, theme.sizeDecor()), paint);
         }
     }
 
     @Override
     protected void drawRest(Canvas canvas, int column, int row, int year, int month, int day) {
         if (calendarInfos != null && calendarInfos.size() > 0) {
-            float radius = columnSize < (rowSize * 0.6) ? columnSize / 2 : (float) (rowSize * 0.6) / 2;
             for (CalendarInfo calendarInfo : calendarInfos) {
                 if (calendarInfo.day == day && calendarInfo.year == year && calendarInfo.month == month + 1) {
-                    float restX = columnSize * column + (columnSize + paint.measureText(day + "")) / 2;
-                    float restY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
-                    if (day == selDay) {
-                        restX = columnSize * column + columnSize / 2 + radius;
-                    }
+                    float pointX0 = columnSize * column + 1;
+                    float pointY0 = rowSize * row - 1;
+                    float pointX1 = (float) (columnSize * column + rowSize * 0.5);
+                    float pointY1 = rowSize * row + 1;
+                    float pointX2 = columnSize * column + 1;
+                    float pointY2 = (float) (rowSize * row + rowSize * 0.5);
+                    Path path = new Path();
+                    path.moveTo(pointX0, pointY0);
+                    path.lineTo(pointX1, pointY1);
+                    path.lineTo(pointX2, pointY2);
+                    path.close();
                     paint.setStyle(Paint.Style.FILL);
                     if (calendarInfo.rest == 2) {//班
                         paint.setColor(theme.colorWork());
-                        paint.setTextSize(theme.sizeDesc());
+                        canvas.drawPath(path, paint);
+
+                        paint.setTextSize(sp2px(context, theme.sizeDesc()));
+                        paint.setColor(theme.colorSelectDay());
                         paint.measureText("班");
-                        canvas.drawText("班", restX, restY, paint);
+                        canvas.drawText("班", pointX0 + 5, pointY0 + paint.measureText("班"), paint);
                     } else if (calendarInfo.rest == 1) {//休息
                         paint.setColor(theme.colorRest());
-                        paint.setTextSize(theme.sizeDesc());
-                        canvas.drawText("休", restX, restY, paint);
+                        canvas.drawPath(path, paint);
+                        paint.setTextSize(sp2px(context, theme.sizeDesc()));
+                        paint.setColor(theme.colorSelectDay());
+                        canvas.drawText("休", pointX0 + 5, pointY0 + paint.measureText("休"), paint);
                     }
                 }
             }
@@ -100,22 +123,21 @@ public class SquareMonthView extends MonthView {
 
     @Override
     protected void drawText(Canvas canvas, int column, int row, int year, int month, int day) {
-        paint.setTextSize(theme.sizeDay());
+        paint.setTextSize(sp2px(context, theme.sizeDay()));
         float startX = columnSize * column + (columnSize - paint.measureText(day + "")) / 2;
         float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
         paint.setStyle(Paint.Style.STROKE);
         String des = iscalendarInfo(year, month, day);
         if (day == selDay) {//日期为选中的日期
             if (!TextUtils.isEmpty(des)) {//desc不为空的时候
-                int dateY = (int) startY;
+                int dateY = (int) (startY - 10);
                 paint.setColor(theme.colorSelectDay());
                 canvas.drawText(day + "", startX, dateY, paint);
 
-                paint.setColor(theme.colorWeekday());
-                paint.setTextSize(theme.sizeDesc());
-                int desX = (int) (columnSize * column + (columnSize - paint.measureText(des)) / 2);
-                int desY = (int) (rowSize * row + rowSize * 0.9 - (paint.ascent() + paint.descent()) / 2);
-                canvas.drawText(des, desX, desY, paint);
+                paint.setTextSize(sp2px(context, theme.sizeDesc()));
+                int priceX = (int) (columnSize * column + (columnSize - paint.measureText(des)) / 2);
+                int priceY = (int) (startY + 15);
+                canvas.drawText(des, priceX, priceY, paint);
             } else {//des为空的时候
                 paint.setColor(theme.colorSelectDay());
                 canvas.drawText(day + "", startX, startY, paint);
@@ -126,15 +148,15 @@ public class SquareMonthView extends MonthView {
             canvas.drawText(day + "", startX, startY, paint);
         } else {
             if (!TextUtils.isEmpty(des)) {//没选中，但是desc不为空
-                int dateY = (int) startY;
+                int dateY = (int) (startY - 10);
                 paint.setColor(theme.colorWeekday());
                 canvas.drawText(day + "", startX, dateY, paint);
 
-                paint.setTextSize(theme.sizeDesc());
+                paint.setTextSize(sp2px(context, theme.sizeDesc()));
                 paint.setColor(theme.colorDesc());
-                int desX = (int) (columnSize * column + Math.abs((columnSize - paint.measureText(des)) / 2));
-                int desY = (int) (startY + 20);
-                canvas.drawText(des, desX, desY, paint);
+                int priceX = (int) (columnSize * column + Math.abs((columnSize - paint.measureText(des)) / 2));
+                int priceY = (int) (startY + 15);
+                canvas.drawText(des, priceX, priceY, paint);
             } else {//des为空
                 paint.setColor(theme.colorWeekday());
                 canvas.drawText(day + "", startX, startY, paint);
@@ -145,5 +167,13 @@ public class SquareMonthView extends MonthView {
     @Override
     protected void createTheme() {
         theme = new SquareDayTheme();
+    }
+
+    /**
+     * 将sp值转换为px值，保证文字大小不变
+     */
+    public int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 }
