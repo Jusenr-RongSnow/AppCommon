@@ -56,7 +56,7 @@ public abstract class MonthView extends View {
         setLeftDate();
         setRightDate();
         createTheme();
-        baseRowSize = rowSize = theme == null ? 70 : theme.dateHeight();
+        baseRowSize = rowSize = theme == null ? 70 : dip2px(context, theme.dateHeight());
         smoothMode = theme == null ? 0 : theme.smoothMode();
     }
 
@@ -368,5 +368,13 @@ public abstract class MonthView extends View {
 
     public int getSelMonth() {
         return selMonth;
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

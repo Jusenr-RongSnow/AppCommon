@@ -74,7 +74,7 @@ public class SquareDayTheme implements IDayTheme {
 
     @Override
     public int dateHeight() {
-        return 70;
+        return 36;
     }
 
     @Override

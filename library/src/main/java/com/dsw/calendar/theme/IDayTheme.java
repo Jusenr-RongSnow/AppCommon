@@ -98,7 +98,7 @@ public interface IDayTheme {
     /**
      * 日期高度
      *
-     * @return
+     * @return dp
      */
     public int dateHeight();
 
