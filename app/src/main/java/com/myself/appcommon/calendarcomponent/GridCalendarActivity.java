@@ -29,7 +29,7 @@ public class GridCalendarActivity extends Activity {
         list.add(new CalendarInfo(currYear, currMonth, 12, "￥1200"));
         list.add(new CalendarInfo(currYear, currMonth, 16, "￥1200"));
         list.add(new CalendarInfo(currYear, currMonth, 28, "￥1200"));
-        list.add(new CalendarInfo(currYear, currMonth, 1, "￥1200", 1));
+        list.add(new CalendarInfo(currYear, currMonth, 1, "￥1200", 1));//1 休2 班
         list.add(new CalendarInfo(currYear, currMonth, 11, "￥1200", 1));
         list.add(new CalendarInfo(currYear, currMonth, 19, "￥1200", 2));
         list.add(new CalendarInfo(currYear, currMonth, 21, "￥1200", 1));
