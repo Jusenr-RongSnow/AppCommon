@@ -9,6 +9,13 @@
     android:orientation="vertical"
     tools:context="com.myself.appcommon.activity.ChoiceTestActivity">
 
+    <FrameLayout
+        android:id="@+id/fl_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/date_view"
         android:layout_width="match_parent"
@@ -103,5 +110,13 @@
             android:textSize="15sp"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="日历弹窗"/>
+
 
 </LinearLayout>
