@@ -44,9 +44,14 @@
         <activity android:name=".activity.ChoiceTest2Activity"/>
         <!--日历控件测试-->
         <activity android:name=".calendarcomponent.CalendarActivity"/>
+        <!--矩形-->
         <activity android:name=".calendarcomponent.GridCalendarActivity"/>
+        <!--大圆-->
         <activity android:name=".calendarcomponent.CircleCalendarActivity"/>
+        <!--小圆-->
         <activity android:name=".calendarcomponent.ADCircleCalendarActivity"/>
+        <!--圆角矩形-->
+        <activity android:name=".calendarcomponent.SquareCalendarActivity"/>
 
     </application>
 

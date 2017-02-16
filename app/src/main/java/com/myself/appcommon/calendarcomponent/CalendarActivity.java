@@ -12,7 +12,7 @@ import com.myself.appcommon.R;
 
 public class CalendarActivity extends Activity {
     private ListView listView;
-    private String[] items = new String[]{"GridCalendarView", "CircleCalendarView", "ADCircleCalendarView"};
+    private String[] items = new String[]{"GridCalendarView", "CircleCalendarView", "ADCircleCalendarView", "SquareCalendarView"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,9 @@ public class CalendarActivity extends Activity {
                         break;
                     case 2:
                         intent = new Intent(CalendarActivity.this, ADCircleCalendarActivity.class);
+                        break;
+                    case 3:
+                        intent = new Intent(CalendarActivity.this, SquareCalendarActivity.class);
                         break;
                     default:
                         break;
