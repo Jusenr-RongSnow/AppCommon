@@ -42,6 +42,11 @@
         <activity android:name=".activity.ChoiceTestActivity"/>
         <!-- 选择控件测试2 -->
         <activity android:name=".activity.ChoiceTest2Activity"/>
+        <!--日历控件测试-->
+        <activity android:name=".calendarcomponent.CalendarActivity"/>
+        <activity android:name=".calendarcomponent.GridCalendarActivity"/>
+        <activity android:name=".calendarcomponent.CircleCalendarActivity"/>
+        <activity android:name=".calendarcomponent.ADCircleCalendarActivity"/>
 
     </application>
 

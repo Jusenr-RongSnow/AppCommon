@@ -29,5 +29,6 @@ dependencies {
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.alibaba:fastjson:1.2.24'
-//    compile 'com.facebook.react:react-native:+'
+    //    compile 'com.facebook.react:react-native:+'
+    compile project(':library')
 }

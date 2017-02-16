@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.myself.appcommon.R;
 import com.myself.appcommon.api.HttpTag;
 import com.myself.appcommon.base.BaseActivity;
+import com.myself.appcommon.calendarcomponent.CalendarActivity;
 import com.myself.appcommon.config.Constants;
 import com.myself.appcommon.http.HttpEngine;
 import com.myself.appcommon.http.command.HttpDataResponse;
@@ -16,7 +17,7 @@ import com.myself.appcommon.manager.ThemeSettingsHelper;
 import com.myself.appcommon.util.DialogUtil;
 
 public class MainActivity extends BaseActivity implements HttpDataResponse, ThemeSettingsHelper.ThemeCallback {
-    public static final String TAG = "MainActivity";
+    public static final String TAG = "CalendarActivity";
 
     private ThemeSettingsHelper mThemeSettingsHelper;
     private Button mTestSendRequest;
@@ -25,6 +26,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mTestWebview;
     private Button mTestChoice;
     private Button mTestChoice2;
+    private Button mCalendar;
 
     @Override
     public boolean needTranslucent() {
@@ -57,6 +59,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mTestWebview = (Button) findViewById(R.id.test_webview);
         mTestChoice = (Button) findViewById(R.id.test_choice);
         mTestChoice2 = (Button) findViewById(R.id.test_choice2);
+        mCalendar = (Button) findViewById(R.id.test_calendar);
     }
 
     @Override
@@ -105,6 +108,13 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 goToActivity(ChoiceTest2Activity.class, false);
+            }
+        });
+        mCalendar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(CalendarActivity.class, false);
             }
         });
     }
