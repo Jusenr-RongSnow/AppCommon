@@ -52,6 +52,8 @@
         <activity android:name=".calendarcomponent.ADCircleCalendarActivity"/>
         <!--圆角矩形-->
         <activity android:name=".calendarcomponent.SquareCalendarActivity"/>
+        <!--日历控件测试2-->
+        <activity android:name=".caldroidsample.CaldroidSampleActivity"/>
 
     </application>
 

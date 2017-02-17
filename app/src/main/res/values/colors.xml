@@ -7,5 +7,8 @@
     <color name="bg_EBEBEB">#EBEBEB</color>
     <color name="bg_FFFFFF">#FFFFFF</color>
 
+    <color name="green">#8FCC85</color>
+    <color name="blue">#FF33B5E5</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

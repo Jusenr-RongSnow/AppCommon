@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.myself.appcommon.R;
 import com.myself.appcommon.api.HttpTag;
 import com.myself.appcommon.base.BaseActivity;
+import com.myself.appcommon.caldroidsample.CaldroidSampleActivity;
 import com.myself.appcommon.calendarcomponent.CalendarActivity;
 import com.myself.appcommon.config.Constants;
 import com.myself.appcommon.http.HttpEngine;
@@ -27,6 +28,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mTestChoice;
     private Button mTestChoice2;
     private Button mCalendar;
+    private Button mCaldroidSample;
 
     @Override
     public boolean needTranslucent() {
@@ -60,6 +62,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mTestChoice = (Button) findViewById(R.id.test_choice);
         mTestChoice2 = (Button) findViewById(R.id.test_choice2);
         mCalendar = (Button) findViewById(R.id.test_calendar);
+        mCaldroidSample = (Button) findViewById(R.id.test_caldroid_sample);
     }
 
     @Override
@@ -115,6 +118,13 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 goToActivity(CalendarActivity.class, false);
+            }
+        });
+        mCaldroidSample.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(CaldroidSampleActivity.class, false);
             }
         });
     }

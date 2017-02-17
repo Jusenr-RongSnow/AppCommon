@@ -60,5 +60,12 @@
             android:layout_height="wrap_content"
             android:text="Calendar"
             android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/test_caldroid_sample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CaldroidSample"
+            android:textAllCaps="false"/>
     </LinearLayout>
 </ScrollView>

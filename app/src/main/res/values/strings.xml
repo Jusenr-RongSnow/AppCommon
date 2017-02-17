@@ -12,4 +12,9 @@
     <string name="footer_hint_load_ready">松开载入更多</string>
     <string name="title_activity_next">NextActivity</string>
 
+    <string name="customize">Customize</string>
+    <string name="show_dialog">Show Dialog</string>
+    <string name="undo">Undo</string>
+
+
 </resources>
