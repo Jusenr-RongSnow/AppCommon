@@ -18,17 +18,28 @@ import static com.dsw.calendar.R.id.year;
 public class Test {
 
     public static void getLastMonthDays() {
-        int currMonth = 8;
+        boolean s = true;
+        int currMonth = 3;
         int lastDays;
-        for (int i = 0; i < 11; i++) {
+//        if (s) {
+//            for (int i = 0; i < 12; i++) {
+//                lastDays = DateUtils.getMonthDays(year, i % 12);
+//                Log.e("####", "getLastMonthDays: " + i + "--" + lastDays);
+//            }
+//        } else {
+//            lastDays = DateUtils.getMonthDays(year, currMonth % 12);
+//            Log.e("####", "getLastMonthDays: " + currMonth + "--" + lastDays);
+//        }
 
-            if (currMonth == 0) {//若果是1月份，上个月则为12月份
-                lastDays = DateUtils.getMonthDays(year, 0);
+        for (int i = 0; i < 12; i++) {
+            currMonth = i;
+            if (currMonth > 0) {
+                lastDays = DateUtils.getMonthDays(year, currMonth % 12);
             } else {
-                lastDays = DateUtils.getMonthDays(year, (11 + currMonth) % 12);
+                lastDays = 31;
             }
 
-            Log.e("####", "getLastMonthDays: " + lastDays);
+            Log.e("####", "getLastMonthDays: " + currMonth + "--" + lastDays);
         }
     }
 }
