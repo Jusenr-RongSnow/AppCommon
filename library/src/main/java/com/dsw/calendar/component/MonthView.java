@@ -109,6 +109,24 @@ public abstract class MonthView extends View {
             drawCurrentMonthText(canvas, column, row, year, month, daysString[row][column]);
             drawOtherMonthText(canvas, column, row, year, month, daysString[row][column]);
         }
+
+        int mLastMonthDays = weekNumber - 1;//当前月份可视上个月的天数
+        int mNextMonthDays = 7 - weekNumber;//当前月份可视下个月的天数
+        int lastDays;
+        if (currMonth == 0) {//若果是1月份，上个月则为12月份
+            lastDays = DateUtils.getMonthDays(year, 0);
+        } else {
+            lastDays = DateUtils.getMonthDays(year, (11 + currMonth) % 12);
+        }
+
+//        for (int i = 0; i < mNextMonthDays; i++) {
+//            column = (i + weekNumber - 1) % 7;//列
+//            row = (i + weekNumber - 1) / 7;//行
+//            daysString[row][column] = i + 1;
+//
+//            drawOtherMonthText(canvas, column, row, year, month, daysString[row][column]);
+//        }
+
         canvas.restore();
     }
 

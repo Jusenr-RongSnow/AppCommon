@@ -74,5 +74,12 @@
             android:layout_height="wrap_content"
             android:text="MyCalendar"
             android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/test_this"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            android:textAllCaps="false"/>
     </LinearLayout>
 </ScrollView>

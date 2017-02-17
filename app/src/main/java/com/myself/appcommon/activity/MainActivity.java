@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dsw.calendar.Test;
 import com.myself.appcommon.R;
 import com.myself.appcommon.api.HttpTag;
 import com.myself.appcommon.base.BaseActivity;
@@ -31,6 +32,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mCalendar;
     private Button mCaldroidSample;
     private Button mMyCalendar;
+    private Button mTest;
 
     @Override
     public boolean needTranslucent() {
@@ -66,6 +68,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mCalendar = (Button) findViewById(R.id.test_calendar);
         mCaldroidSample = (Button) findViewById(R.id.test_caldroid_sample);
         mMyCalendar = (Button) findViewById(R.id.test_my_calendar);
+        mTest = (Button) findViewById(R.id.test_this);
     }
 
     @Override
@@ -135,6 +138,13 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 goToActivity(MyCalendarActivity.class, false);
+            }
+        });
+        mTest.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Test.getLastMonthDays();
             }
         });
     }
