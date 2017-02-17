@@ -67,6 +67,7 @@
 
     <style name="CaldroidDefaultSquareCell" parent="CaldroidDefaultCell"/>
 
+    <!--Weekday-->
     <style name="CaldroidDefaultWeekday">
         <item name="android:textColor">@color/caldroid_middle_gray</item>
         <item name="android:gravity">center</item>

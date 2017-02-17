@@ -112,7 +112,7 @@ public class CaldroidSampleActivity extends AppCompatActivity {
 
             @Override
             public void onChangeMonth(int month, int year) {
-                String text = "month: " + month + " year: " + year;
+                String text = year + "年" + month + "月";
                 Toast.makeText(getApplicationContext(), text,
                         Toast.LENGTH_SHORT).show();
             }
