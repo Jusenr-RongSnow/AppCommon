@@ -1,4 +1,4 @@
-package com.myself.appcommon.caldroidsample;
+package com.myself.appcommon.calendar.caldroidsample;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;

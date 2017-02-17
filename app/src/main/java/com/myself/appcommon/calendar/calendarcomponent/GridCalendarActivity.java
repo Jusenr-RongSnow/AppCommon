@@ -1,4 +1,4 @@
-package com.myself.appcommon.calendarcomponent;
+package com.myself.appcommon.calendar.calendarcomponent;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,20 +6,20 @@ import android.widget.Toast;
 
 import com.dsw.calendar.component.MonthView;
 import com.dsw.calendar.entity.CalendarInfo;
-import com.dsw.calendar.views.CircleCalendarView;
+import com.dsw.calendar.views.GridCalendarView;
 import com.myself.appcommon.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class CircleCalendarActivity extends Activity {
-    private CircleCalendarView circleCalendarView;
+public class GridCalendarActivity extends Activity {
+    private GridCalendarView gridCalendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_circle_calendar_view);
+        setContentView(R.layout.activity_grid_calendar_view);
         Calendar calendar = Calendar.getInstance();
         int currYear = calendar.get(Calendar.YEAR);
         int currMonth = calendar.get(Calendar.MONTH) + 1;
@@ -29,17 +29,17 @@ public class CircleCalendarActivity extends Activity {
         list.add(new CalendarInfo(currYear, currMonth, 12, "￥1200"));
         list.add(new CalendarInfo(currYear, currMonth, 16, "￥1200"));
         list.add(new CalendarInfo(currYear, currMonth, 28, "￥1200"));
-        list.add(new CalendarInfo(currYear, currMonth, 1, "￥1200", 1));
+        list.add(new CalendarInfo(currYear, currMonth, 1, "￥1200", 1));//1 休2 班
         list.add(new CalendarInfo(currYear, currMonth, 11, "￥1200", 1));
         list.add(new CalendarInfo(currYear, currMonth, 19, "￥1200", 2));
         list.add(new CalendarInfo(currYear, currMonth, 21, "￥1200", 1));
-        circleCalendarView = (CircleCalendarView) findViewById(R.id.circleMonthView);
-        circleCalendarView.setCalendarInfos(list);
-        circleCalendarView.setDateClick(new MonthView.IDateClick() {
+        gridCalendarView = (GridCalendarView) findViewById(R.id.gridMonthView);
+        gridCalendarView.setCalendarInfos(list);
+        gridCalendarView.setDateClick(new MonthView.IDateClick() {
 
             @Override
             public void onClickOnDate(int year, int month, int day) {
-                Toast.makeText(CircleCalendarActivity.this, "点击了" + year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GridCalendarActivity.this, "点击了" + year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
             }
         });
     }

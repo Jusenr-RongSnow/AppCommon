@@ -1,4 +1,4 @@
-package com.myself.appcommon.caldroidsample;
+package com.myself.appcommon.calendar.caldroidsample;
 
 import com.dsw.calendar.caldroid.CaldroidFragment;
 import com.dsw.calendar.caldroid.CaldroidGridAdapter;

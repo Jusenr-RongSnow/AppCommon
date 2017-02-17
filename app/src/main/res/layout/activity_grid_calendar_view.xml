@@ -3,7 +3,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".calendarcomponent.GridCalendarActivity">
+                tools:context=".calendar.calendarcomponent.GridCalendarActivity">
 
     <com.dsw.calendar.views.GridCalendarView
         android:id="@+id/gridMonthView"

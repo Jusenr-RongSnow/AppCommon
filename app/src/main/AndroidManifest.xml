@@ -43,17 +43,19 @@
         <!-- 选择控件测试2 -->
         <activity android:name=".activity.ChoiceTest2Activity"/>
         <!--日历控件测试-->
-        <activity android:name=".calendarcomponent.CalendarActivity"/>
+        <activity android:name=".calendar.calendarcomponent.CalendarActivity"/>
         <!--矩形-->
-        <activity android:name=".calendarcomponent.GridCalendarActivity"/>
+        <activity android:name=".calendar.calendarcomponent.GridCalendarActivity"/>
         <!--大圆-->
-        <activity android:name=".calendarcomponent.CircleCalendarActivity"/>
+        <activity android:name=".calendar.calendarcomponent.CircleCalendarActivity"/>
         <!--小圆-->
-        <activity android:name=".calendarcomponent.ADCircleCalendarActivity"/>
+        <activity android:name=".calendar.calendarcomponent.ADCircleCalendarActivity"/>
         <!--圆角矩形-->
-        <activity android:name=".calendarcomponent.SquareCalendarActivity"/>
+        <activity android:name=".calendar.calendarcomponent.SquareCalendarActivity"/>
         <!--日历控件测试2-->
-        <activity android:name=".caldroidsample.CaldroidSampleActivity"/>
+        <activity android:name=".calendar.caldroidsample.CaldroidSampleActivity"/>
+        <!--日历控件测试3-->
+        <activity android:name=".calendar.mycalendar.MyCalendarActivity"/>
 
     </application>
 

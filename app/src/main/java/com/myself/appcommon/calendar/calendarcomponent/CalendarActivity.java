@@ -1,4 +1,4 @@
-package com.myself.appcommon.calendarcomponent;
+package com.myself.appcommon.calendar.calendarcomponent;
 
 import android.app.Activity;
 import android.content.Intent;

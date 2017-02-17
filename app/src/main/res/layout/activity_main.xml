@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_EBEBEB"
-    tools:context="com.myself.appcommon.activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +66,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CaldroidSample"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/test_my_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyCalendar"
             android:textAllCaps="false"/>
     </LinearLayout>
 </ScrollView>

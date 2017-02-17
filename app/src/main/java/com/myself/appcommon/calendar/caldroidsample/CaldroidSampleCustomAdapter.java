@@ -1,4 +1,4 @@
-package com.myself.appcommon.caldroidsample;
+package com.myself.appcommon.calendar.caldroidsample;
 
 import android.content.Context;
 import android.content.res.Resources;

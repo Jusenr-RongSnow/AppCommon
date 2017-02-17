@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_EBEBEB"
-    tools:context="com.myself.appcommon.activity.ReactNative2Activity">
+    tools:context=".activity.ReactNative2Activity">
 
     <com.facebook.react.ReactRootView
         android:id="@+id/reactRootView"

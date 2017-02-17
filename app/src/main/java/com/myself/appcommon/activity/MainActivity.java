@@ -7,8 +7,9 @@ import android.widget.Toast;
 import com.myself.appcommon.R;
 import com.myself.appcommon.api.HttpTag;
 import com.myself.appcommon.base.BaseActivity;
-import com.myself.appcommon.caldroidsample.CaldroidSampleActivity;
-import com.myself.appcommon.calendarcomponent.CalendarActivity;
+import com.myself.appcommon.calendar.caldroidsample.CaldroidSampleActivity;
+import com.myself.appcommon.calendar.calendarcomponent.CalendarActivity;
+import com.myself.appcommon.calendar.mycalendar.MyCalendarActivity;
 import com.myself.appcommon.config.Constants;
 import com.myself.appcommon.http.HttpEngine;
 import com.myself.appcommon.http.command.HttpDataResponse;
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mTestChoice2;
     private Button mCalendar;
     private Button mCaldroidSample;
+    private Button mMyCalendar;
 
     @Override
     public boolean needTranslucent() {
@@ -63,6 +65,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mTestChoice2 = (Button) findViewById(R.id.test_choice2);
         mCalendar = (Button) findViewById(R.id.test_calendar);
         mCaldroidSample = (Button) findViewById(R.id.test_caldroid_sample);
+        mMyCalendar = (Button) findViewById(R.id.test_my_calendar);
     }
 
     @Override
@@ -125,6 +128,13 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 goToActivity(CaldroidSampleActivity.class, false);
+            }
+        });
+        mMyCalendar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(MyCalendarActivity.class, false);
             }
         });
     }
