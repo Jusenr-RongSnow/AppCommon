@@ -95,18 +95,19 @@ public abstract class MonthView extends View {
         columnSize = getWidth() * 1.0F / NUM_COLUMNS;
         rowSize = getHeight() * 1.0F / NUM_ROWS;
         daysString = new int[6][7];
-        int mMonthDays = DateUtils.getMonthDays(year, month);
-        int weekNumber = DateUtils.getFirstDayWeek(year, month);
+        int mMonthDays = DateUtils.getMonthDays(year, month);//对应月份的天数
+        int weekNumber = DateUtils.getFirstDayWeek(year, month);//对应月份1号对应的星期几
         int column, row;
         drawLines(canvas, NUM_ROWS);
         for (int day = 0; day < mMonthDays; day++) {
-            column = (day + weekNumber - 1) % 7;
-            row = (day + weekNumber - 1) / 7;
+            column = (day + weekNumber - 1) % 7;//列
+            row = (day + weekNumber - 1) / 7;//行
             daysString[row][column] = day + 1;
             drawBG(canvas, column, row, daysString[row][column]);
             drawDecor(canvas, column, row, year, month, daysString[row][column]);
             drawRest(canvas, column, row, year, month, daysString[row][column]);
-            drawText(canvas, column, row, year, month, daysString[row][column]);
+            drawCurrentMonthText(canvas, column, row, year, month, daysString[row][column]);
+            drawOtherMonthText(canvas, column, row, year, month, daysString[row][column]);
         }
         canvas.restore();
     }
@@ -124,7 +125,9 @@ public abstract class MonthView extends View {
 
     protected abstract void drawRest(Canvas canvas, int column, int row, int year, int month, int day);
 
-    protected abstract void drawText(Canvas canvas, int column, int row, int year, int month, int day);
+    protected abstract void drawCurrentMonthText(Canvas canvas, int column, int row, int year, int month, int day);
+
+    protected abstract void drawOtherMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
      * 实例化Theme

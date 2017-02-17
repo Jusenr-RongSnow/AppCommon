@@ -37,8 +37,8 @@ public class SquareCalendarView extends LinearLayout implements View.OnClickList
         addView(weekView, llParams);
         addView(squareMonthView, llParams);
 
-        view.findViewById(R.id.ll_left).setOnClickListener(this);
-        view.findViewById(R.id.ll_right).setOnClickListener(this);
+        view.findViewById(R.id.left).setOnClickListener(this);
+        view.findViewById(R.id.right).setOnClickListener(this);
         textViewYear = (TextView) view.findViewById(R.id.year);
         textViewMonth = (TextView) view.findViewById(R.id.month);
         squareMonthView.setMonthLisener(new MonthView.IMonthLisener() {

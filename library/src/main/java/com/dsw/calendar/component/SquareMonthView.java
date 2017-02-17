@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -23,7 +24,7 @@ public class SquareMonthView extends MonthView {
     }
 
     /**
-     * 绘制间隔线
+     * 绘制 间隔线
      *
      * @param canvas
      * @param rowsCount
@@ -58,10 +59,17 @@ public class SquareMonthView extends MonthView {
 //        }
     }
 
+    /**
+     * 绘制 背景色矩形
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param day
+     */
     @Override
     protected void drawBG(Canvas canvas, int column, int row, int day) {
         if (day == selDay) {
-            //绘制背景色矩形
             float startRecX = columnSize * column + 1;
             float startRecY = rowSize * row + 1;
             float endRecX = startRecX + columnSize - 2 * 1;
@@ -72,6 +80,16 @@ public class SquareMonthView extends MonthView {
         }
     }
 
+    /**
+     * 绘制 描述文字
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     @Override
     protected void drawDecor(Canvas canvas, int column, int row, int year, int month, int day) {
         if (calendarInfos != null && calendarInfos.size() > 0) {
@@ -84,6 +102,16 @@ public class SquareMonthView extends MonthView {
         }
     }
 
+    /**
+     * 绘制 班、休标记
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     @Override
     protected void drawRest(Canvas canvas, int column, int row, int year, int month, int day) {
         if (calendarInfos != null && calendarInfos.size() > 0) {
@@ -101,7 +129,7 @@ public class SquareMonthView extends MonthView {
                     path.lineTo(pointX2, pointY2);
                     path.close();
                     paint.setStyle(Paint.Style.FILL);
-                    if (calendarInfo.rest == 2) {//班
+                    if (calendarInfo.rest == 2) {//上班
                         paint.setColor(theme.colorWork());
                         canvas.drawPath(path, paint);
 
@@ -121,8 +149,18 @@ public class SquareMonthView extends MonthView {
         }
     }
 
+    /**
+     * 绘制 当月天数
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     @Override
-    protected void drawText(Canvas canvas, int column, int row, int year, int month, int day) {
+    protected void drawCurrentMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
         paint.setTextSize(sp2px(context, theme.sizeDay()));
         float startX = columnSize * column + (columnSize - paint.measureText(day + "")) / 2;
         float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
@@ -143,14 +181,18 @@ public class SquareMonthView extends MonthView {
                 canvas.drawText(day + "", startX, startY, paint);
             }
         } else if (day == currDay && currDay != selDay && currMonth == selMonth) {//今日的颜色，不是选中的时候
-            //正常月，选中其他日期，则今日为红色
+            //正常月，选中其他日期，则今日为紫色,下划线标记
             paint.setColor(theme.colorToday());
             canvas.drawText(day + "", startX, startY, paint);
-            //下划线标记
-            paint.setTextSize(sp2px(context, theme.sizeDay()));
-            int priceX = (int) (columnSize * column + (columnSize - paint.measureText(des)) / 2) - 5;
+            //今日下划线标记
+            Paint paintTag = new Paint();
+            Typeface typeface = Typeface.create("宋体", Typeface.BOLD);
+            paintTag.setTypeface(typeface);
+            paintTag.setColor(theme.colorToday());
+            paintTag.setTextSize(sp2px(context, theme.sizeDay()));
+            int priceX = (int) (columnSize * column + (columnSize - paintTag.measureText(des)) / 2) - 5;
             int priceY = (int) (startY + 15);
-            canvas.drawText("_", priceX, priceY, paint);
+            canvas.drawText("_", priceX, priceY, paintTag);
         } else {
             if (!TextUtils.isEmpty(des)) {//没选中，但是desc不为空
                 int dateY = (int) (startY - 10);
@@ -170,12 +212,24 @@ public class SquareMonthView extends MonthView {
     }
 
     @Override
+    protected void drawOtherMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+
+    }
+
+    /**
+     * 获取主题
+     */
+    @Override
     protected void createTheme() {
         theme = new SquareDayTheme();
     }
 
     /**
      * 将sp值转换为px值，保证文字大小不变
+     *
+     * @param context
+     * @param spValue
+     * @return
      */
     public int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;

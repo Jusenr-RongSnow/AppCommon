@@ -99,7 +99,7 @@ public class ADCircleMonthView extends MonthView {
     }
 
     @Override
-    protected void drawText(Canvas canvas, int column, int row, int year, int month, int day) {
+    protected void drawCurrentMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
         paint.setTextSize(theme.sizeDay());
         float startX = columnSize * column + (columnSize - paint.measureText(day + "")) / 2;
         float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
@@ -140,6 +140,11 @@ public class ADCircleMonthView extends MonthView {
                 canvas.drawText(day + "", startX, startY, paint);
             }
         }
+    }
+
+    @Override
+    protected void drawOtherMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+
     }
 
     @Override

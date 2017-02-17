@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class DateUtils {
     /**
-     * 通过年份和月份 得到当月的日子
+     * 通过年份和月份 得到当月的天数
      *
      * @param year
      * @param month
