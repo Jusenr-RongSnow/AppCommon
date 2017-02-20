@@ -1,8 +1,6 @@
 package com.myself.appcommon.calendar.caldroidsample;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -39,13 +37,20 @@ public class CaldroidSampleActivity extends AppCompatActivity {
         cal.add(Calendar.DATE, 7);
         Date greenDate = cal.getTime();
 
+        //today
+        cal = Calendar.getInstance();
+//        cal.add(Calendar.DATE,0);
+        Date TodayDate = cal.getTime();
+
         if (caldroidFragment != null) {
-            ColorDrawable blue = new ColorDrawable(getResources().getColor(R.color.blue));
-            ColorDrawable green = new ColorDrawable(Color.GREEN);
-            caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
-            caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
-            caldroidFragment.setTextColorForDate(R.color.white, blueDate);
-            caldroidFragment.setTextColorForDate(R.color.white, greenDate);
+//            ColorDrawable blue = new ColorDrawable(getResources().getColor(R.color.blue));
+//            ColorDrawable green = new ColorDrawable(Color.GREEN);
+//            caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
+//            caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
+//            caldroidFragment.setTextColorForDate(R.color.white, blueDate);
+//            caldroidFragment.setTextColorForDate(R.color.white, greenDate);
+
+            caldroidFragment.setTextColorForDate(R.color.color_8B49F6, TodayDate);
         }
     }
 
@@ -54,7 +59,7 @@ public class CaldroidSampleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caldroid_sample);
 
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd ");
 
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
@@ -106,30 +111,27 @@ public class CaldroidSampleActivity extends AppCompatActivity {
 
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+                String s = "SelectSate " + formatter.format(date);
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChangeMonth(int month, int year) {
-                String text = year + "年" + month + "月";
-                Toast.makeText(getApplicationContext(), text,
-                        Toast.LENGTH_SHORT).show();
+                String s = year + "年" + month + "月";
+//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClickDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(),
-                        "Long click " + formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+                String s = "Long click " + formatter.format(date);
+//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCaldroidViewCreated() {
                 if (caldroidFragment.getLeftArrowButton() != null) {
-                    Toast.makeText(getApplicationContext(),
-                            "Caldroid view is created", Toast.LENGTH_SHORT)
-                            .show();
+                    String s = "Caldroid view is created";
+//                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 }
             }
 

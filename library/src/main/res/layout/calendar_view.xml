@@ -58,6 +58,7 @@
         android:background="#F5F5F5"
         android:numColumns="7"
         android:padding="5dp"
+        android:scrollbars="none"
         android:stretchMode="columnWidth"
         android:visibility="visible">
     </GridView>
@@ -66,6 +67,7 @@
     <com.dsw.calendar.infiniteviewpager.InfiniteViewPager
         android:id="@+id/months_infinite_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:scrollIndicators="none"/>
 
 </LinearLayout>
