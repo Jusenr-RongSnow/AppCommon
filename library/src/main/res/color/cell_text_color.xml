@@ -3,7 +3,9 @@
           xmlns:caldroid="http://schemas.android.com/apk/res-auto">
 
     <item android:color="@color/caldroid_darker_gray" caldroid:state_date_disabled="true"/>
-    <item android:color="@color/caldroid_darker_gray" caldroid:state_date_prev_next_month="true"/>
-    <item android:color="@color/caldroid_black"/>
+    <!--当前月除外字体颜色-->
+    <item android:color="#C2C2C2" caldroid:state_date_prev_next_month="true"/>
+    <!--当前月字体颜色-->
+    <item android:color="#313131"/>
 
 </selector>
