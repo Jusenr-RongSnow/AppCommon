@@ -10,17 +10,20 @@
         android:id="@+id/calendar_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/calendar_left_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:drawableLeft="@drawable/left_arrow"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/btn_arrow_p2"
             android:drawablePadding="8dp"
             android:gravity="center"
-            android:text="上个月"/>
+            android:text="上个月"
+            android:textColor="@color/color_8B49F6"
+            android:textSize="14sp"/>
 
 
         <TextView
@@ -29,31 +32,37 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="2017年2月"
-            android:textColor="@android:color/black"
-            android:textSize="21sp"/>
+            android:textColor="@color/color_313131"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/calendar_right_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:drawablePadding="8dp"
-            android:drawableRight="@drawable/right_arrow"
+            android:drawableRight="@drawable/btn_arrow_p"
             android:gravity="center"
-            android:text="下个月"/>
+            android:text="下个月"
+            android:textColor="@color/color_8B49F6"
+            android:textSize="14sp"/>
 
     </RelativeLayout>
 
+    <!--weekday-->
     <GridView
         android:id="@+id/weekday_gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-10dp"
+        android:background="#F5F5F5"
         android:numColumns="7"
+        android:padding="5dp"
         android:stretchMode="columnWidth"
         android:visibility="visible">
     </GridView>
 
+    <!--monthDays-->
     <com.dsw.calendar.infiniteviewpager.InfiniteViewPager
         android:id="@+id/months_infinite_pager"
         android:layout_width="match_parent"

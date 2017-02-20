@@ -353,6 +353,7 @@ public class CaldroidFragment extends DialogFragment {
      *
      * @return
      */
+    // TODO: 2017/2/20  
     public Map<String, Object> getCaldroidData() {
         caldroidData.clear();
         caldroidData.put(DISABLE_DATES, disableDates);
@@ -1407,8 +1408,7 @@ public class CaldroidFragment extends DialogFragment {
             dateGridFragment.setGridViewRes(getGridViewRes());
             dateGridFragment.setGridAdapter(adapter);
             dateGridFragment.setOnItemClickListener(getDateItemClickListener());
-            dateGridFragment
-                    .setOnItemLongClickListener(getDateItemLongClickListener());
+            dateGridFragment.setOnItemLongClickListener(getDateItemLongClickListener());
         }
 
         // Setup InfinitePagerAdapter to wrap around MonthPagerAdapter
@@ -1429,7 +1429,7 @@ public class CaldroidFragment extends DialogFragment {
      */
     protected ArrayList<String> getDaysOfWeek() {
         ArrayList<String> list = new ArrayList<String>();
-
+        //E代表星期
         SimpleDateFormat fmt = new SimpleDateFormat("E", Locale.getDefault());
 
         // 17 Feb 2013 is Sunday

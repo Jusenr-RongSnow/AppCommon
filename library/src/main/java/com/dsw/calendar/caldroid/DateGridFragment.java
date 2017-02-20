@@ -61,8 +61,6 @@ public class DateGridFragment extends Fragment {
     }
 
     private void setupGridView() {
-
-
         // Client normally needs to provide the adapter and onItemClickListener
         // before the fragment is attached to avoid complex crash due to
         // fragment life cycles

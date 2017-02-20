@@ -42,8 +42,8 @@ public class WeekdayArrayAdapter extends ArrayAdapter<String> {
 
         // Set content
         String item = getItem(position);
-        textView.setText(item);
 
+        textView.setText(item);
         return textView;
     }
 
@@ -52,5 +52,4 @@ public class WeekdayArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return inflater.cloneInContext(wrapped);
     }
-
 }
