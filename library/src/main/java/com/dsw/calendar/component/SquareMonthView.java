@@ -7,9 +7,11 @@ import android.graphics.Path;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.dsw.calendar.entity.CalendarInfo;
 import com.dsw.calendar.theme.SquareDayTheme;
+import com.dsw.calendar.utils.DateUtils;
 
 /**
  * Created by Administrator on 2016/8/9.
@@ -212,7 +214,90 @@ public class SquareMonthView extends MonthView {
     }
 
     @Override
-    protected void drawOtherMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+    protected void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+        Log.e(TAG, "drawLastMonthText: " + year + "-" + month + "-" + day);
+
+        int mMonthDays = DateUtils.getMonthDays(year, month);//对应月份的天数
+        int weekNumber = DateUtils.getFirstDayWeek(year, month);//当前月份1号对应的星期几
+
+        int mLastMonthDays = weekNumber - 1;//当前月份可视上个月的天数
+        int mNextMonthDays = 7 - weekNumber;//当前月份可视下个月的天数
+        int lastDays;
+        if (month > 0) {
+            lastDays = DateUtils.getMonthDays(year, month - 1 % 12);
+        } else {
+            lastDays = 31;
+        }
+
+        int mLastMonthStartDay = lastDays - mLastMonthDays + 1;
+
+        Log.e(TAG, "drawLastMonthText: lastDays" + lastDays);
+        Log.e(TAG, "drawLastMonthText: mLastMonthStartDay" + mLastMonthStartDay);
+
+        if (mLastMonthDays != 0) {
+            for (int i = mLastMonthStartDay; i <= lastDays; i++) {
+                paint.setTextSize(sp2px(context, theme.sizeDay()));
+                float startX = columnSize * column + (columnSize - paint.measureText(day + "")) / 2;
+                float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
+                paint.setStyle(Paint.Style.STROKE);
+                String des = iscalendarInfo(year, month - 1, mLastMonthStartDay);
+
+                Log.e(TAG, "drawLastMonthText: i" + i);
+
+//                paint.setColor(theme.colorWeekday());
+//                canvas.drawText(mLastMonthStartDay + "", startX, startY, paint);
+
+//                row++;
+
+//                if (day == selDay) {//日期为选中的日期
+//                    if (!TextUtils.isEmpty(des)) {//desc不为空的时候
+//                        int dateY = (int) (startY - 10);
+//                        paint.setColor(theme.colorSelectDay());
+//                        canvas.drawText(day + "", startX, dateY, paint);
+//
+//                        paint.setTextSize(sp2px(context, theme.sizeDesc()));
+//                        int priceX = (int) (columnSize * column + (columnSize - paint.measureText(des)) / 2);
+//                        int priceY = (int) (startY + 15);
+//                        canvas.drawText(des, priceX, priceY, paint);
+//                    } else {//des为空的时候
+//                        paint.setColor(theme.colorSelectDay());
+//                        canvas.drawText(day + "", startX, startY, paint);
+//                    }
+//                } else if (day == currDay && currDay != selDay && currMonth == selMonth) {//今日的颜色，不是选中的时候
+//                    //正常月，选中其他日期，则今日为紫色,下划线标记
+//                    paint.setColor(theme.colorToday());
+//                    canvas.drawText(day + "", startX, startY, paint);
+//                    //今日下划线标记
+//                    Paint paintTag = new Paint();
+//                    Typeface typeface = Typeface.create("宋体", Typeface.BOLD);
+//                    paintTag.setTypeface(typeface);
+//                    paintTag.setColor(theme.colorToday());
+//                    paintTag.setTextSize(sp2px(context, theme.sizeDay()));
+//                    int priceX = (int) (columnSize * column + (columnSize - paintTag.measureText(des)) / 2) - 5;
+//                    int priceY = (int) (startY + 15);
+//                    canvas.drawText("_", priceX, priceY, paintTag);
+//                } else {
+//                    if (!TextUtils.isEmpty(des)) {//没选中，但是desc不为空
+//                        int dateY = (int) (startY - 10);
+//                        paint.setColor(theme.colorWeekday());
+//                        canvas.drawText(day + "", startX, dateY, paint);
+//
+//                        paint.setTextSize(sp2px(context, theme.sizeDesc()));
+//                        paint.setColor(theme.colorDesc());
+//                        int priceX = (int) (columnSize * column + Math.abs((columnSize - paint.measureText(des)) / 2));
+//                        int priceY = (int) (startY + 15);
+//                        canvas.drawText(des, priceX, priceY, paint);
+//                    } else {//des为空
+//                        paint.setColor(theme.colorWeekday());
+//                        canvas.drawText(day + "", startX, startY, paint);
+//                    }
+//                }
+            }
+        }
+    }
+
+    @Override
+    protected void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
 
     }
 

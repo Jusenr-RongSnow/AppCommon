@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -21,6 +22,8 @@ import java.util.List;
  * Created by Administrator on 2016/7/30.
  */
 public abstract class MonthView extends View {
+    public static final String TAG = MonthView.class.getSimpleName();
+
     protected int NUM_COLUMNS = 7;
     protected int NUM_ROWS = 6;
     protected Paint paint;
@@ -89,14 +92,15 @@ public abstract class MonthView extends View {
     }
 
     private void drawDate(Canvas canvas, int year, int month, int startX, int startY) {
+        Log.e(TAG, "drawDate: " + year + "-" + month);
         canvas.save();
         canvas.translate(startX, startY);
         NUM_ROWS = getMonthRowNumber(year, month);
         columnSize = getWidth() * 1.0F / NUM_COLUMNS;
         rowSize = getHeight() * 1.0F / NUM_ROWS;
         daysString = new int[6][7];
-        int mMonthDays = DateUtils.getMonthDays(year, month);//对应月份的天数
-        int weekNumber = DateUtils.getFirstDayWeek(year, month);//对应月份1号对应的星期几
+        int mMonthDays = DateUtils.getMonthDays(year, month);//当前月份对应月份的天数
+        int weekNumber = DateUtils.getFirstDayWeek(year, month);//当前月份1号对应的星期几
         int column, row;
         drawLines(canvas, NUM_ROWS);
         for (int day = 0; day < mMonthDays; day++) {
@@ -107,25 +111,10 @@ public abstract class MonthView extends View {
             drawDecor(canvas, column, row, year, month, daysString[row][column]);
             drawRest(canvas, column, row, year, month, daysString[row][column]);
             drawCurrentMonthText(canvas, column, row, year, month, daysString[row][column]);
-            drawOtherMonthText(canvas, column, row, year, month, daysString[row][column]);
+//            drawLastMonthText(canvas, 0, 0, year, month, daysString[row][column]);
+            drawNextMonthText(canvas, column, row, year, month, daysString[row][column]);
         }
-
-        int mLastMonthDays = weekNumber - 1;//当前月份可视上个月的天数
-        int mNextMonthDays = 7 - weekNumber;//当前月份可视下个月的天数
-        int lastDays;
-        if (currMonth == 0) {//若果是1月份，上个月则为12月份
-            lastDays = DateUtils.getMonthDays(year, 0);
-        } else {
-            lastDays = DateUtils.getMonthDays(year, (11 + currMonth) % 12);
-        }
-
-//        for (int i = 0; i < mNextMonthDays; i++) {
-//            column = (i + weekNumber - 1) % 7;//列
-//            row = (i + weekNumber - 1) / 7;//行
-//            daysString[row][column] = i + 1;
-//
-//            drawOtherMonthText(canvas, column, row, year, month, daysString[row][column]);
-//        }
+        drawLastMonthText(canvas, 0, 0, year, month, daysString[0][0]);
 
         canvas.restore();
     }
@@ -145,7 +134,9 @@ public abstract class MonthView extends View {
 
     protected abstract void drawCurrentMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
-    protected abstract void drawOtherMonthText(Canvas canvas, int column, int row, int year, int month, int day);
+    protected abstract void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day);
+
+    protected abstract void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
      * 实例化Theme

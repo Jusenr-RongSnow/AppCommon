@@ -156,7 +156,12 @@ public class GridMonthView extends MonthView {
     }
 
     @Override
-    protected void drawOtherMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+    protected void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+
+    }
+
+    @Override
+    protected void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
 
     }
 

@@ -19,7 +19,7 @@ public class Test {
 
     public static void getLastMonthDays() {
         boolean s = true;
-        int currMonth = 3;
+        int currMonth = 2;
         int lastDays;
 //        if (s) {
 //            for (int i = 0; i < 12; i++) {
@@ -33,13 +33,14 @@ public class Test {
 
         for (int i = 0; i < 12; i++) {
             currMonth = i;
+//            lastDays = DateUtils.getMonthDays(year, currMonth % 12);
             if (currMonth > 0) {
-                lastDays = DateUtils.getMonthDays(year, currMonth % 12);
+                lastDays = DateUtils.getMonthDays(year, currMonth - 1 % 12);
             } else {
                 lastDays = 31;
             }
 
-            Log.e("####", "getLastMonthDays: " + currMonth + "--" + lastDays);
+            Log.e("####", "getLastMonthDays: " +  currMonth++ + "--" + currMonth + "--" + lastDays);
         }
     }
 }
