@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              style="?styleCaldroidViewLayout"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="#FFFFFF"
               android:orientation="vertical">
 
-    <!--main-->
-    <LinearLayout
+    <!--head-->
+    <RelativeLayout
         android:id="@+id/calendar_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:padding="5dp">
 
-        <Button
+        <TextView
             android:id="@+id/calendar_left_arrow"
-            style="?styleCaldroidLeftArrow"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/left_arrow"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="上个月"/>
+
 
         <TextView
             android:id="@+id/calendar_month_year_textview"
-            style="?styleCaldroidMonthName"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="2017年2月"
+            android:textColor="@android:color/black"
+            android:textSize="21sp"/>
 
-        <Button
+        <TextView
             android:id="@+id/calendar_right_arrow"
-            style="?styleCaldroidRightArrow"/>
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/right_arrow"
+            android:gravity="center"
+            android:text="下个月"/>
+
+    </RelativeLayout>
 
     <GridView
         android:id="@+id/weekday_gridview"
@@ -31,7 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-10dp"
         android:numColumns="7"
-        android:stretchMode="columnWidth">
+        android:stretchMode="columnWidth"
+        android:visibility="visible">
     </GridView>
 
     <com.dsw.calendar.infiniteviewpager.InfiniteViewPager

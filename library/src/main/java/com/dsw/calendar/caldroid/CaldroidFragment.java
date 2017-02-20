@@ -23,7 +23,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -79,6 +78,8 @@ import hirondelle.date4j.DateTime;
 
 @SuppressLint("DefaultLocale")
 public class CaldroidFragment extends DialogFragment {
+    public static final String TAG = CaldroidFragment.class.getSimpleName();
+
     /**
      * Weekday conventions
      */
@@ -120,8 +121,8 @@ public class CaldroidFragment extends DialogFragment {
     /**
      * Caldroid view components
      */
-    private Button leftArrowButton;
-    private Button rightArrowButton;
+    private TextView leftArrowButton;
+    private TextView rightArrowButton;
     private TextView monthTitleTextView;
     private GridView weekdayGridView;
     private InfiniteViewPager dateViewPager;
@@ -318,11 +319,11 @@ public class CaldroidFragment extends DialogFragment {
     /**
      * To let user customize the navigation buttons
      */
-    public Button getLeftArrowButton() {
+    public TextView getLeftArrowButton() {
         return leftArrowButton;
     }
 
-    public Button getRightArrowButton() {
+    public TextView getRightArrowButton() {
         return rightArrowButton;
     }
 
@@ -477,8 +478,7 @@ public class CaldroidFragment extends DialogFragment {
         }
     }
 
-    public void setTextColorForDateTimes(
-            Map<DateTime, Integer> textColorForDateTimeMap) {
+    public void setTextColorForDateTimes(Map<DateTime, Integer> textColorForDateTimeMap) {
         this.textColorForDateTimeMap.putAll(textColorForDateTimeMap);
     }
 
@@ -1266,8 +1266,8 @@ public class CaldroidFragment extends DialogFragment {
                 .findViewById(R.id.calendar_month_year_textview);
 
         // For the left arrow button
-        leftArrowButton = (Button) view.findViewById(R.id.calendar_left_arrow);
-        rightArrowButton = (Button) view
+        leftArrowButton = (TextView) view.findViewById(R.id.calendar_left_arrow);
+        rightArrowButton = (TextView) view
                 .findViewById(R.id.calendar_right_arrow);
 
         // Navigate to previous month when user click
@@ -1430,7 +1430,7 @@ public class CaldroidFragment extends DialogFragment {
     protected ArrayList<String> getDaysOfWeek() {
         ArrayList<String> list = new ArrayList<String>();
 
-        SimpleDateFormat fmt = new SimpleDateFormat("EEE", Locale.getDefault());
+        SimpleDateFormat fmt = new SimpleDateFormat("E", Locale.getDefault());
 
         // 17 Feb 2013 is Sunday
         DateTime sunday = new DateTime(2013, 2, 17, 0, 0, 0, 0);
@@ -1438,10 +1438,15 @@ public class CaldroidFragment extends DialogFragment {
 
         for (int i = 0; i < 7; i++) {
             Date date = CalendarHelper.convertDateTimeToDate(nextDay);
-            list.add(fmt.format(date).toUpperCase());
+            String upperCase = fmt.format(date).toUpperCase();//周日
+            //[周日, 周一, 周二, 周三, 周四, 周五, 周六]
+            String substring = upperCase.substring(1);
+            //[日, 一, 二, 三, 四, 五, 六]
+//            Log.e(TAG, "getDaysOfWeek: " + substring);
+            list.add(substring);
             nextDay = nextDay.plusDays(1);
         }
-
+//        Log.e(TAG, "getDaysOfWeek: " + list);
         return list;
     }
 
