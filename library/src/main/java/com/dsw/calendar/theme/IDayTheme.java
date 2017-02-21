@@ -47,6 +47,13 @@ public interface IDayTheme {
     public int colorWeekend();
 
     /**
+     * 周末的颜色
+     *
+     * @return
+     */
+    public int colorOtherMonth();
+
+    /**
      * 事务装饰颜色
      *
      * @return 16进制颜色值 hex color

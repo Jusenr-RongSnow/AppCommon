@@ -26,7 +26,6 @@ public class SquareDayTheme implements IDayTheme {
         return Color.parseColor("#FFFFFF");
     }
 
-
     @Override
     public int colorWeekday() {
         return Color.parseColor("#4F4F4F");
@@ -35,6 +34,11 @@ public class SquareDayTheme implements IDayTheme {
     @Override
     public int colorWeekend() {
         return Color.parseColor("#BEBEBE");
+    }
+
+    @Override
+    public int colorOtherMonth() {
+        return Color.parseColor("#C2C2C2");
     }
 
     @Override

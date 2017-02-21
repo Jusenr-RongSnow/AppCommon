@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 
 import com.dsw.calendar.entity.CalendarInfo;
 import com.dsw.calendar.theme.ADCircleDayTheme;
+import com.dsw.calendar.utils.DateUtils;
 
 /**
  * Created by Administrator on 2016/8/9.
@@ -144,12 +145,67 @@ public class ADCircleMonthView extends MonthView {
 
     @Override
     protected void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+        int weekNumber = DateUtils.getFirstDayWeek(year, month);//当前月份1号对应的星期几
+        int mLastMonthDays = weekNumber - 1;//当前月份可视上个月的天数
+        int lastMonth, lastDays;
+        if (month > 0) {
+            lastMonth = month - 1;
+            lastDays = DateUtils.getMonthDays(year, lastMonth % 12);
+        } else {
+            lastMonth = 11;
+            lastDays = 31;
+        }
+        int mLastMonthStartDay = lastDays - mLastMonthDays + 1;
 
+        if (mLastMonthDays != 0) {
+            for (int i = mLastMonthStartDay; i <= lastDays; i++) {
+                paint.setTextSize(theme.sizeDay());
+                float startX = columnSize * column + (columnSize - paint.measureText(mLastMonthStartDay + "")) / 2;
+                float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
+                paint.setStyle(Paint.Style.STROKE);
+                String des = iscalendarInfo(year, lastMonth, mLastMonthStartDay);
+
+//                Log.e(TAG, "drawNextMonthText: " + lastMonth + "--" + mLastMonthStartDay);
+
+                paint.setColor(theme.colorOtherMonth());
+                canvas.drawText(mLastMonthStartDay + "", startX, startY, paint);
+
+                column++;
+                mLastMonthStartDay++;
+            }
+        }
     }
 
     @Override
     protected void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
+        int nextMonth;
+        if (month < 11) {
+            nextMonth = month + 1;
+        } else {
+            nextMonth = 1;
+        }
+        int nextNumber = DateUtils.getFirstDayWeek(year, nextMonth);//当前月份页下个月1号对应的星期几
+        int mNextMonthDays = 7 - nextNumber + 1;//当前月份可视下个月的天数
 
+        int mNextMonthStartDay = 1;
+
+        if (mNextMonthDays != 0) {
+            for (int i = mNextMonthStartDay; i <= mNextMonthDays; i++) {
+                paint.setTextSize(theme.sizeDay());
+                float startX = columnSize * column + (columnSize - paint.measureText(mNextMonthStartDay + "")) / 2;
+                float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
+                paint.setStyle(Paint.Style.STROKE);
+                String des = iscalendarInfo(year, nextMonth, mNextMonthStartDay);
+
+//                Log.e(TAG, "drawNextMonthText: " + nextMonth + "--" + mNextMonthStartDay);
+
+                paint.setColor(theme.colorOtherMonth());
+                canvas.drawText(mNextMonthStartDay + "", startX, startY, paint);
+
+                column++;
+                mNextMonthStartDay++;
+            }
+        }
     }
 
     @Override

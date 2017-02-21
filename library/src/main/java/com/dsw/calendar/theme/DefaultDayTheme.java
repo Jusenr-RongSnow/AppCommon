@@ -37,6 +37,11 @@ public class DefaultDayTheme implements IDayTheme {
     }
 
     @Override
+    public int colorOtherMonth() {
+        return Color.parseColor("#C2C2C2");
+    }
+
+    @Override
     public int colorDecor() {
         return Color.parseColor("#68CB00");
     }

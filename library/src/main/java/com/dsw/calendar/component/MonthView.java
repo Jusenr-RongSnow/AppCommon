@@ -111,10 +111,12 @@ public abstract class MonthView extends View {
             drawDecor(canvas, column, row, year, month, daysString[row][column]);
             drawRest(canvas, column, row, year, month, daysString[row][column]);
             drawCurrentMonthText(canvas, column, row, year, month, daysString[row][column]);
-//            drawLastMonthText(canvas, 0, 0, year, month, daysString[row][column]);
-            drawNextMonthText(canvas, column, row, year, month, daysString[row][column]);
         }
         drawLastMonthText(canvas, 0, 0, year, month, daysString[0][0]);
+
+        column = (mMonthDays + weekNumber - 1) % 7;//列
+        row = (mMonthDays + weekNumber - 1) / 7;//行
+        drawNextMonthText(canvas, column, row, year, month, daysString[row][column]);
 
         canvas.restore();
     }
