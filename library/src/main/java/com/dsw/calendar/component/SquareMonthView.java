@@ -214,6 +214,16 @@ public class SquareMonthView extends MonthView {
         }
     }
 
+    /**
+     * 绘制 当月所显示上个月的天数
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     @Override
     protected void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
         int weekNumber = DateUtils.getFirstDayWeek(year, month);//当前月份1号对应的星期几
@@ -247,6 +257,16 @@ public class SquareMonthView extends MonthView {
         }
     }
 
+    /**
+     * 绘制 当月所显示下个月的天数
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     @Override
     protected void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day) {
         int nextMonth;

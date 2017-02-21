@@ -92,7 +92,6 @@ public abstract class MonthView extends View {
     }
 
     private void drawDate(Canvas canvas, int year, int month, int startX, int startY) {
-        Log.e(TAG, "drawDate: " + year + "-" + month);
         canvas.save();
         canvas.translate(startX, startY);
         NUM_ROWS = getMonthRowNumber(year, month);
@@ -122,22 +121,81 @@ public abstract class MonthView extends View {
     }
 
     /**
-     * 回执格网线
+     * 绘制 间隔线
      *
      * @param canvas
+     * @param rowsCount
      */
     protected abstract void drawLines(Canvas canvas, int rowsCount);
 
+    /**
+     * 绘制 背景色矩形
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param day
+     */
     protected abstract void drawBG(Canvas canvas, int column, int row, int day);
 
+    /**
+     * 绘制 描述文字
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     protected abstract void drawDecor(Canvas canvas, int column, int row, int year, int month, int day);
 
+    /**
+     * 绘制 班、休标记
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     protected abstract void drawRest(Canvas canvas, int column, int row, int year, int month, int day);
 
+    /**
+     * 绘制 当月天数
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     protected abstract void drawCurrentMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
+    /**
+     * 绘制 当月所显示上个月的天数
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     protected abstract void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
+    /**
+     * 绘制 当月所显示下个月的天数
+     *
+     * @param canvas
+     * @param column
+     * @param row
+     * @param year
+     * @param month
+     * @param day
+     */
     protected abstract void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
@@ -263,6 +321,7 @@ public abstract class MonthView extends View {
     private void doClickAction(int x, int y) {
         int row = (int) (y / rowSize);
         int column = (int) (x / columnSize);
+        Log.e(TAG, "doClickAction: row=" + row + "---column=" + column + "selMonth=" + selMonth);
         setSelectDate(selYear, selMonth, daysString[row][column]);
         invalidate();
         //执行activity发送过来的点击处理事件
