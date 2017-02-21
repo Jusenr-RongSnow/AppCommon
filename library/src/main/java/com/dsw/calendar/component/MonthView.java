@@ -122,79 +122,36 @@ public abstract class MonthView extends View {
 
     /**
      * 绘制 间隔线
-     *
-     * @param canvas
-     * @param rowsCount
      */
     protected abstract void drawLines(Canvas canvas, int rowsCount);
 
     /**
      * 绘制 背景色矩形
-     *
-     * @param canvas
-     * @param column
-     * @param row
-     * @param day
      */
     protected abstract void drawBG(Canvas canvas, int column, int row, int day);
 
     /**
      * 绘制 描述文字
-     *
-     * @param canvas
-     * @param column
-     * @param row
-     * @param year
-     * @param month
-     * @param day
      */
     protected abstract void drawDecor(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
      * 绘制 班、休标记
-     *
-     * @param canvas
-     * @param column
-     * @param row
-     * @param year
-     * @param month
-     * @param day
      */
     protected abstract void drawRest(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
      * 绘制 当月天数
-     *
-     * @param canvas
-     * @param column
-     * @param row
-     * @param year
-     * @param month
-     * @param day
      */
     protected abstract void drawCurrentMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
      * 绘制 当月所显示上个月的天数
-     *
-     * @param canvas
-     * @param column
-     * @param row
-     * @param year
-     * @param month
-     * @param day
      */
     protected abstract void drawLastMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
     /**
      * 绘制 当月所显示下个月的天数
-     *
-     * @param canvas
-     * @param column
-     * @param row
-     * @param year
-     * @param month
-     * @param day
      */
     protected abstract void drawNextMonthText(Canvas canvas, int column, int row, int year, int month, int day);
 
