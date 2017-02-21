@@ -11,6 +11,7 @@ import com.myself.appcommon.base.BaseActivity;
 import com.myself.appcommon.calendar.caldroidsample.CaldroidSampleActivity;
 import com.myself.appcommon.calendar.calendarcomponent.CalendarActivity;
 import com.myself.appcommon.calendar.mycalendar.MyCalendarActivity;
+import com.myself.appcommon.calendar.mycalendar2.mainview.Calendar2Activity;
 import com.myself.appcommon.config.Constants;
 import com.myself.appcommon.http.HttpEngine;
 import com.myself.appcommon.http.command.HttpDataResponse;
@@ -20,7 +21,7 @@ import com.myself.appcommon.manager.ThemeSettingsHelper;
 import com.myself.appcommon.util.DialogUtil;
 
 public class MainActivity extends BaseActivity implements HttpDataResponse, ThemeSettingsHelper.ThemeCallback {
-    public static final String TAG = "CalendarActivity";
+    public static final String TAG = "Calendar2Activity";
 
     private ThemeSettingsHelper mThemeSettingsHelper;
     private Button mTestSendRequest;
@@ -32,6 +33,8 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mCalendar;
     private Button mCaldroidSample;
     private Button mMyCalendar;
+    private Button mCalendar2;
+    private Button mCalendar3;
     private Button mTest;
 
     @Override
@@ -68,6 +71,8 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mCalendar = (Button) findViewById(R.id.test_calendar);
         mCaldroidSample = (Button) findViewById(R.id.test_caldroid_sample);
         mMyCalendar = (Button) findViewById(R.id.test_my_calendar);
+        mCalendar2 = (Button) findViewById(R.id.test_calendar2);
+        mCalendar3 = (Button) findViewById(R.id.test_calendar3);
         mTest = (Button) findViewById(R.id.test_this);
     }
 
@@ -138,6 +143,20 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 goToActivity(MyCalendarActivity.class, false);
+            }
+        });
+        mCalendar2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(Calendar2Activity.class, false);
+            }
+        });
+        mCalendar3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(Calendar2Activity.class, false);
             }
         });
         mTest.setOnClickListener(new View.OnClickListener() {

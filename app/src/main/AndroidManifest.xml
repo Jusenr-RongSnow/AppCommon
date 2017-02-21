@@ -56,6 +56,8 @@
         <activity android:name=".calendar.caldroidsample.CaldroidSampleActivity"/>
         <!--日历控件测试3-->
         <activity android:name=".calendar.mycalendar.MyCalendarActivity"/>
+        <!--日历控件测试4-->
+        <activity android:name=".calendar.mycalendar2.mainview.Calendar2Activity"/>
 
     </application>
 
