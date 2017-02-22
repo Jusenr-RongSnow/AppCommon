@@ -43,6 +43,8 @@ public class SampleTimesSquareActivity extends Activity {
         final Button multi = (Button) findViewById(R.id.button_multi);
         final Button range = (Button) findViewById(R.id.button_range);
         final Button dialog = (Button) findViewById(R.id.button_dialog);
+        final Button done = (Button) findViewById(R.id.done_button);
+
         single.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +116,7 @@ public class SampleTimesSquareActivity extends Activity {
             }
         });
 
-        findViewById(R.id.done_button).setOnClickListener(new OnClickListener() {
+        done.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Long longLime = calendar.getSelectedDate().getTime();
