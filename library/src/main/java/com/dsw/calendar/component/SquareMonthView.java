@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -76,8 +77,14 @@ public class SquareMonthView extends MonthView {
             float endRecX = startRecX + columnSize - 2 * 1;
             float endRecY = startRecY + rowSize - 2 * 1;
             paint.setColor(theme.colorSelectBG());
-            paint.setStyle(Paint.Style.FILL);
-            canvas.drawRect(startRecX, startRecY, endRecX, endRecY, paint);
+            paint.setStyle(Paint.Style.FILL);//充满
+            //矩形
+//            canvas.drawRect(startRecX, startRecY, endRecX, endRecY, paint);
+
+            paint.setAntiAlias(true);// 设置画笔的锯齿效果
+            RectF rectF = new RectF(startRecX, startRecY, endRecX, endRecY);
+            //圆角矩形
+            canvas.drawRoundRect(rectF, 10, 10, paint);//第二个参数是x半径，第三个参数是y半径
         }
     }
 

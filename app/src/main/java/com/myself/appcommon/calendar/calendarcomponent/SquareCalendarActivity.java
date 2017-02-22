@@ -2,7 +2,6 @@ package com.myself.appcommon.calendar.calendarcomponent;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.dsw.calendar.component.MonthView;
 import com.dsw.calendar.entity.CalendarInfo;
@@ -33,7 +32,7 @@ public class SquareCalendarActivity extends Activity {
 
             @Override
             public void onClickOnDate(int year, int month, int day) {
-                Toast.makeText(SquareCalendarActivity.this, year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SquareCalendarActivity.this, year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
             }
         });
     }
