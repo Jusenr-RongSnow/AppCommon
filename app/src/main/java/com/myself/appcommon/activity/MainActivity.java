@@ -12,6 +12,7 @@ import com.myself.appcommon.calendar.caldroidsample.CaldroidSampleActivity;
 import com.myself.appcommon.calendar.calendarcomponent.CalendarActivity;
 import com.myself.appcommon.calendar.mycalendar.MyCalendarActivity;
 import com.myself.appcommon.calendar.mycalendar2.mainview.Calendar2Activity;
+import com.myself.appcommon.calendar.timessquare.SampleTimesSquareActivity;
 import com.myself.appcommon.config.Constants;
 import com.myself.appcommon.http.HttpEngine;
 import com.myself.appcommon.http.command.HttpDataResponse;
@@ -156,7 +157,7 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
 
             @Override
             public void onClick(View v) {
-                goToActivity(Calendar2Activity.class, false);
+                goToActivity(SampleTimesSquareActivity.class, false);
             }
         });
         mTest.setOnClickListener(new View.OnClickListener() {

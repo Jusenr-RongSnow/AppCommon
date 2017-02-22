@@ -18,4 +18,13 @@
         <attr name="android:textColor"/>
         <attr name="android:background"/>
     </declare-styleable>
+
+    <declare-styleable name="calendar_cell">
+        <attr name="state_selectable" format="boolean"/>
+        <attr name="state_current_month" format="boolean"/>
+        <attr name="state_today" format="boolean"/>
+        <attr name="state_range_first" format="boolean"/>
+        <attr name="state_range_middle" format="boolean"/>
+        <attr name="state_range_last" format="boolean"/>
+    </declare-styleable>
 </resources>

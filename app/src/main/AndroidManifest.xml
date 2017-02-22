@@ -58,6 +58,8 @@
         <activity android:name=".calendar.mycalendar.MyCalendarActivity"/>
         <!--日历控件测试4-->
         <activity android:name=".calendar.mycalendar2.mainview.Calendar2Activity"/>
+        <!--日历控件测试5-->
+        <activity android:name=".calendar.timessquare.SampleTimesSquareActivity"/>
 
     </application>
 
