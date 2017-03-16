@@ -42,25 +42,30 @@
         <activity android:name=".activity.ChoiceTestActivity"/>
         <!-- 选择控件测试2 -->
         <activity android:name=".activity.ChoiceTest2Activity"/>
-        <!--日历控件测试-->
+        <!-- 日历控件测试 -->
         <activity android:name=".calendar.calendarcomponent.CalendarActivity"/>
-        <!--矩形-->
+        <!-- 矩形 -->
         <activity android:name=".calendar.calendarcomponent.GridCalendarActivity"/>
-        <!--大圆-->
+        <!-- 大圆 -->
         <activity android:name=".calendar.calendarcomponent.CircleCalendarActivity"/>
-        <!--小圆-->
+        <!-- 小圆 -->
         <activity android:name=".calendar.calendarcomponent.ADCircleCalendarActivity"/>
-        <!--圆角矩形-->
+        <!-- 圆角矩形 -->
         <activity android:name=".calendar.calendarcomponent.SquareCalendarActivity"/>
-        <!--日历控件测试2-->
+        <!-- 日历控件测试2 -->
         <activity android:name=".calendar.caldroidsample.CaldroidSampleActivity"/>
-        <!--日历控件测试3-->
+        <!-- 日历控件测试3 -->
         <activity android:name=".calendar.mycalendar.MyCalendarActivity"/>
-        <!--日历控件测试4-->
+        <!-- 日历控件测试4 -->
         <activity android:name=".calendar.mycalendar2.mainview.Calendar2Activity"/>
-        <!--日历控件测试5-->
+        <!-- 日历控件测试5 -->
         <activity android:name=".calendar.timessquare.SampleTimesSquareActivity"/>
 
+        <service
+            android:name=".unInstall.UnInstallServer"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

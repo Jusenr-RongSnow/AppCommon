@@ -31,4 +31,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.24'
     //    compile 'com.facebook.react:react-native:+'
     compile project(':library')
+    compile project(':okhttputils')
 }

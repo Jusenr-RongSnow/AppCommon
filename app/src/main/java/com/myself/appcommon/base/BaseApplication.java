@@ -11,6 +11,7 @@ import android.os.Handler;
 
 import com.myself.appcommon.receiver.ExternalStorageReceiver;
 import com.myself.appcommon.receiver.NetStatusReceiver;
+import com.myself.appcommon.unInstall.UnInstallServer;
 
 /**
  * 应用程序基类
@@ -46,7 +47,10 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mBaseApplication = this;
+        //初始化SD、网络状态
         initNetAndSDCard();
+        //初始化地址和emojs资源
+        startService(new Intent(this, UnInstallServer.class));
     }
 
     @Override
