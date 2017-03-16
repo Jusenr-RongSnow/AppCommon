@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Environment;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.io.File;
 
@@ -34,7 +35,7 @@ public class UnInstallServer extends Service {
         }
 
         File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
-
+        Log.e("UnInstallServer", "onCreate: -####");
         if (file.exists())
             file.delete();
     }

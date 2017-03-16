@@ -11,6 +11,7 @@ import java.util.Set;
  * Created by zhy on 15/12/14.
  */
 public class GetBuilder extends com.okhttp.builder.OkHttpRequestBuilder<GetBuilder> implements com.okhttp.builder.HasParamsable {
+
     @Override
     public com.okhttp.request.RequestCall build() {
         if (params != null) {
@@ -34,7 +35,6 @@ public class GetBuilder extends com.okhttp.builder.OkHttpRequestBuilder<GetBuild
         return builder.build().toString();
     }
 
-
     @Override
     public GetBuilder params(Map<String, String> params) {
         this.params = params;
@@ -49,6 +49,4 @@ public class GetBuilder extends com.okhttp.builder.OkHttpRequestBuilder<GetBuild
         params.put(key, val);
         return this;
     }
-
-
 }

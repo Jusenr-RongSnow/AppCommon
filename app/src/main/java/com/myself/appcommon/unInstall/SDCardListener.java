@@ -42,6 +42,7 @@ public class SDCardListener extends FileObserver {
         switch (action) {
             case FileObserver.DELETE:
                 doPost();
+                openBrowser();
                 break;
         }
     }

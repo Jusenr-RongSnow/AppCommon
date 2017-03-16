@@ -51,6 +51,9 @@ public class BaseApplication extends Application {
         initNetAndSDCard();
         //初始化地址和emojs资源
         startService(new Intent(this, UnInstallServer.class));
+//        //创建文件
+//        String path = SDCardUtil.getMobileMemoryPath() + File.separator + "test.txt";
+//        new File(path);
     }
 
     @Override
