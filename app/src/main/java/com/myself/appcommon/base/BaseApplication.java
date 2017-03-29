@@ -13,6 +13,8 @@ import com.myself.appcommon.receiver.ExternalStorageReceiver;
 import com.myself.appcommon.receiver.NetStatusReceiver;
 import com.myself.appcommon.unInstall.UnInstallServer;
 
+import butterknife.ButterKnife;
+
 /**
  * 应用程序基类
  *
@@ -22,6 +24,7 @@ public class BaseApplication extends Application {
 
     private static BaseApplication mBaseApplication;
     private Handler mObservableHandler = new Handler();
+    public static boolean isDebug = false;
 
     public BaseApplication() {
         super();
@@ -49,6 +52,8 @@ public class BaseApplication extends Application {
         mBaseApplication = this;
         //初始化SD、网络状态
         initNetAndSDCard();
+        //ButterKnife的Debug模式
+        ButterKnife.setDebug(isDebug);
         //初始化地址和emojs资源
         startService(new Intent(this, UnInstallServer.class));
 //        //创建文件

@@ -2,21 +2,19 @@ package com.myself.appcommon.base;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
-import android.view.Window;
 
 import com.myself.appcommon.R;
 import com.myself.appcommon.config.Constants;
 import com.myself.appcommon.manager.ActivityManager;
-import com.myself.appcommon.manager.SystemBarTintManager;
 import com.myself.appcommon.util.DeviceUtil;
 import com.myself.appcommon.util.DialogUtil;
 import com.myself.appcommon.util.LogUtil;
-import com.myself.appcommon.widget.SwipeBackLayout;
 
 import butterknife.ButterKnife;
 
@@ -25,7 +23,10 @@ import butterknife.ButterKnife;
  *
  * @author widebluesky
  */
-abstract public class BaseActivity extends FragmentActivity {
+abstract public class BasicActivity extends FragmentActivity {
+
+    protected Context mContext;
+    protected Bundle args;
 
     /**
      * Activity管理
@@ -35,12 +36,12 @@ abstract public class BaseActivity extends FragmentActivity {
     /**
      * 沉浸式管理
      */
-    private SystemBarTintManager mTintManager;
+//    private SystemBarTintManager mTintManager;
 
     /**
      * 横滑返回 - 与沉浸式有冲突慎用
      */
-    private SwipeBackLayout mSwipeBackLayout;
+//    private SwipeBackLayout mSwipeBackLayout;
 
     /**
      * 是否可以滑动返回变量
@@ -57,17 +58,19 @@ abstract public class BaseActivity extends FragmentActivity {
      *
      * @return
      */
-    abstract public boolean needTranslucent();
+//    abstract public boolean needTranslucent();
 
     /**
-     * 设置ContentView
+     * 设置布局id
+     *
+     * @return 布局id
      */
-    abstract public void setContentView();
+    protected abstract int getLayoutId();
 
     /**
      * 初始化静态数据
      */
-    abstract public void initStaticData();
+//    abstract public void initStaticData();
 
     /**
      * 初始化动态数据
@@ -82,24 +85,34 @@ abstract public class BaseActivity extends FragmentActivity {
     /**
      * 初始化监听器
      */
-    abstract public void initListener();
+//    abstract public void initListener();
 
     @Override
-    final protected void onCreate(android.os.Bundle savedInstanceState) {
+    protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        activityManager.addActivity(this);
-        if (needTranslucent()) {
-            mTintManager = new SystemBarTintManager(this);
-            mTintManager.setStatusBarTintEnabled(true);
-            mTintManager.setNavigationBarTintEnabled(true);
-        }
-        setContentView();
+
+        int layoutId = getLayoutId();
+        if (layoutId == 0)
+            throw new RuntimeException("找不到Layout资源,Fragment初始化失败!");
+        setContentView(layoutId);
+
         ButterKnife.bind(this);
-        initStaticData();
-        initView();
-        initListener();
+        mContext = this;
+
+        this.args = getIntent().getExtras() != null ? getIntent().getExtras() : new Bundle();
+
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        activityManager.addActivity(this);
+//        if (needTranslucent()) {
+//            mTintManager = new SystemBarTintManager(this);
+//            mTintManager.setStatusBarTintEnabled(true);
+//            mTintManager.setNavigationBarTintEnabled(true);
+//        }
+//        setContentView();
+//        initStaticData();
         initData();
+        initView();
+//        initListener();
     }
 
     ;
@@ -386,10 +399,10 @@ abstract public class BaseActivity extends FragmentActivity {
      * @param blue
      */
     public void setStatusBarColor(int alpha, int red, int green, int blue) {
-        if (needTranslucent() && mTintManager != null) {
-            int color = Color.argb(alpha, Color.red(red), Color.green(green), Color.blue(blue));
-            mTintManager.setTintColor(color);
-        }
+//        if (needTranslucent() && mTintManager != null) {
+//            int color = Color.argb(alpha, Color.red(red), Color.green(green), Color.blue(blue));
+//            mTintManager.setTintColor(color);
+//        }
     }
 
     /**
@@ -398,9 +411,9 @@ abstract public class BaseActivity extends FragmentActivity {
      * @param res
      */
     public void setStatusBarResource(int res) {
-        if (needTranslucent() && mTintManager != null) {
-            mTintManager.setStatusBarTintResource(res);
-        }
+//        if (needTranslucent() && mTintManager != null) {
+//            mTintManager.setStatusBarTintResource(res);
+//        }
     }
 
     /**
@@ -409,10 +422,10 @@ abstract public class BaseActivity extends FragmentActivity {
      * @param alpha
      */
     public void setStatusBarAlpha(int alpha) {
-        if (needTranslucent() && mTintManager != null) {
-            mTintManager.setStatusBarAlpha(alpha);
-
-        }
+//        if (needTranslucent() && mTintManager != null) {
+//            mTintManager.setStatusBarAlpha(alpha);
+//
+//        }
     }
 
 }

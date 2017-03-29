@@ -8,6 +8,8 @@ import com.dsw.calendar.Test;
 import com.myself.appcommon.R;
 import com.myself.appcommon.api.HttpTag;
 import com.myself.appcommon.base.BaseActivity;
+import com.myself.appcommon.base.Main2Activity;
+import com.myself.appcommon.base.Main3Activity;
 import com.myself.appcommon.calendar.caldroidsample.CaldroidSampleActivity;
 import com.myself.appcommon.calendar.calendarcomponent.CalendarActivity;
 import com.myself.appcommon.calendar.mycalendar.MyCalendarActivity;
@@ -37,6 +39,8 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
     private Button mCalendar2;
     private Button mCalendar3;
     private Button mTest;
+    private Button mBasic;
+    private Button mBase;
 
     @Override
     public boolean needTranslucent() {
@@ -75,6 +79,8 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
         mCalendar2 = (Button) findViewById(R.id.test_calendar2);
         mCalendar3 = (Button) findViewById(R.id.test_calendar3);
         mTest = (Button) findViewById(R.id.test_this);
+        mBasic = (Button) findViewById(R.id.test_basic);
+        mBase = (Button) findViewById(R.id.test_base);
     }
 
     @Override
@@ -165,6 +171,20 @@ public class MainActivity extends BaseActivity implements HttpDataResponse, Them
             @Override
             public void onClick(View v) {
                 Test.getLastMonthDays();
+            }
+        });
+        mBasic.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(Main2Activity.class, false);
+            }
+        });
+        mBase.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToActivity(Main3Activity.class, false);
             }
         });
     }

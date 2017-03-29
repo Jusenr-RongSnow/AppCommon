@@ -95,5 +95,19 @@
             android:layout_height="wrap_content"
             android:text="Test"
             android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/test_basic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Basic"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/test_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Base"
+            android:textAllCaps="false"/>
     </LinearLayout>
 </ScrollView>
